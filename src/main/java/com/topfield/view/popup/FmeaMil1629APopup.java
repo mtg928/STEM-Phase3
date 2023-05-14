@@ -1,0 +1,976 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.topfield.view.popup;
+
+import com.topfield.controller.BusinessException;
+import com.topfield.dao.CalcFunctionsDao;
+import com.topfield.dao.CalcfileDao;
+import com.topfield.dao.FunctionalfailuresDao;
+import com.topfield.dao.MainProductGroupDao;
+import com.topfield.dao.SubProductComponentsDao;
+import com.topfield.dao.SubProductGroupDao;
+import com.topfield.daoImpl.CalcFunctionsDaoImpl;
+import com.topfield.daoImpl.CalcfileDaoImpl;
+import com.topfield.daoImpl.FunctionalfailuresDaoImpl;
+import com.topfield.daoImpl.MainProductGroupDaoImpl;
+import com.topfield.daoImpl.SubProductComponentsDaoImpl;
+import com.topfield.daoImpl.SubProductGroupDaoImpl;
+import com.topfield.modal.Functionalfailures;
+import com.topfield.modal.MainProductGroup;
+import com.topfield.modal.SubProductComponents;
+import com.topfield.modal.SubProductGroup;
+import com.topfield.datamodel.Item;
+import com.topfield.modal.CalcFunctions;
+import com.topfield.modal.Calcfile;
+import com.topfield.user.UserInfo;
+import com.topfield.valid.JTextFieldLimit;
+import com.topfield.view.train.FunctionalComponents;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Murali
+ */
+public class FmeaMil1629APopup extends javax.swing.JPanel {
+
+    private MainProductGroupDao mainDao = new MainProductGroupDaoImpl();
+    private SubProductGroupDao spgDao = new SubProductGroupDaoImpl();
+    private SubProductComponentsDao spcDao = new SubProductComponentsDaoImpl();
+    private CalcFunctionsDao calcFunctionsDao = new CalcFunctionsDaoImpl();
+     private CalcfileDao CalcfileDao = new CalcfileDaoImpl();
+    private int mpgId;
+    private boolean edit;
+    private boolean bottomUp;
+    private Calcfile clfile;
+    
+    public FmeaMil1629APopup(int mpgHdrId,List<Integer> addedList,boolean edit,boolean bottomUp) {
+        initComponents();
+        this.mpgId = mpgHdrId;
+        this.edit = edit;
+        this.bottomUp= bottomUp;
+        setValidationMessage("");
+        List<CalcFunctions> calcFunList = calcFunctionsDao.getAllCalcFunctionsByMpgheader(mpgHdrId);
+        
+       
+        for (CalcFunctions calcFunctions : calcFunList) {
+            jComboBox1.addItem(new Item(calcFunctions.getCalcFunId(), calcFunctions.getCalcFunction()));
+        }
+        
+        
+        if (bottomUp) {
+
+        }else{
+            loadComponents(addedList,edit);
+            loadSubsystemBreakdownCode(((Item)jComboBox3.getSelectedItem()).getId());
+        
+        jComboBox1.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e){
+
+                loadComponents(addedList,edit);
+            }
+        });
+        
+        jComboBox3.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e){
+
+                loadSubsystemBreakdownCode(((Item)e.getItem()).getId());
+            }
+        });
+        }
+        
+        if (edit) {
+            jComboBox1.setEnabled(false);
+           // jComboBox3.setEnabled(false);
+        }
+        
+        jLabel3.setVisible(!bottomUp);
+        jComboBox3.setVisible(!bottomUp);
+        jComboBox3.setEnabled(!bottomUp);
+        checkbox1.setVisible(!bottomUp);
+
+        jLabel5.setVisible(bottomUp);
+        jTextField2.setVisible(bottomUp);
+        
+                
+        jTextField1.setEnabled(bottomUp);
+        jTextField3.setEnabled(bottomUp);
+        inputValidation();
+        
+    }
+    
+    public void loadComponents(List<Integer> addedList,boolean edit){
+       jComboBox3.removeAllItems();
+       Collection<Calcfile> calcfileRef = CalcfileDao.getAllCalcfileByCalcFun(((Item)jComboBox1.getSelectedItem()).getId());
+                
+       for (Calcfile calcfile : calcfileRef) {
+          
+         if(!addedList.contains(calcfile.getCalcId()) || edit){  
+         jComboBox3.addItem(new Item(calcfile.getCalcId(), calcfile.getComponents())); 
+         }
+       }
+    
+        if(addedList.size() == calcfileRef.size()){
+          BusinessException.showBusinessException("FM0207001", "All components in the CMM are already exists for FMEA. \n Please go to CMM to add new component. ", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void loadSubsystemBreakdownCode(int calcId){
+      Calcfile Calcfile = CalcfileDao.findById(calcId);
+       
+      setSubsystemBreakdownCode(Calcfile.getCompId());
+      setFailureMode(Calcfile.getFailureMode());
+    }
+    
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea7 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        checkbox1 = new java.awt.Checkbox();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea6 = new javax.swing.JTextArea();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea11 = new javax.swing.JTextArea();
+        jComboBox5 = new javax.swing.JComboBox<>();
+
+        jLabel1.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Failure Identification");
+        jLabel1.setOpaque(true);
+
+        jLabel2.setText("Breakdown Code ");
+
+        jTextField1.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        jTextField1.setEnabled(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Component Name");
+
+        jComboBox1.setPreferredSize(new java.awt.Dimension(56, 20));
+
+        jLabel5.setText("Component Name");
+
+        jComboBox3.setPreferredSize(new java.awt.Dimension(56, 20));
+
+        jLabel6.setText("Component Function");
+
+        jTextField3.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        jTextField3.setEnabled(false);
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Failure mode");
+
+        jLabel7.setText("Phase");
+
+        jLabel9.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Failure Effects");
+        jLabel9.setOpaque(true);
+
+        jLabel10.setText("Local System Level");
+
+        jLabel11.setText("Failure Cause");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel12.setText("Train Subsystem Level");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jLabel13.setText("Train Level");
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setLineWrap(true);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setLineWrap(true);
+        jTextArea4.setRows(5);
+        jScrollPane4.setViewportView(jTextArea4);
+
+        jTextArea7.setColumns(20);
+        jTextArea7.setLineWrap(true);
+        jTextArea7.setRows(5);
+        jScrollPane7.setViewportView(jTextArea7);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        jCheckBox1.setText("UTO Mode");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox2.setText("RM Mode");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox3.setText("DM Mode");
+
+        jCheckBox4.setText("ATPM Mode");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox4)))
+        );
+
+        checkbox1.setLabel("Edit CalcFile Data");
+        checkbox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkbox1ItemStateChanged(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel4.setText("jLabel4");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(2, 2, 2))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jScrollPane7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                    .addComponent(jTextField3)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel11)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel4)
+                        .addGap(41, 41, 41))))
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel1);
+
+        jLabel15.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Detection and Recovery Measures");
+        jLabel15.setOpaque(true);
+
+        jLabel16.setText("Failure detection");
+
+        jTextArea5.setColumns(20);
+        jTextArea5.setLineWrap(true);
+        jTextArea5.setRows(5);
+        jScrollPane5.setViewportView(jTextArea5);
+
+        jLabel17.setText("<html> Preventive and compensating measures </html>");
+
+        jTextArea6.setColumns(20);
+        jTextArea6.setLineWrap(true);
+        jTextArea6.setRows(5);
+        jScrollPane6.setViewportView(jTextArea6);
+
+        jLabel22.setText("Serverity Class");
+
+        jLabel23.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("Remarks");
+        jLabel23.setOpaque(true);
+
+        jLabel27.setText("Remarks");
+
+        jTextArea11.setColumns(20);
+        jTextArea11.setLineWrap(true);
+        jTextArea11.setRows(5);
+        jScrollPane11.setViewportView(jTextArea11);
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Category I (Catastrophic)", "Category II (Critical)", "Category III (Marginal)", "Category IV (Minor)" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                        .addGap(121, 121, 121))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel27))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void checkbox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkbox1ItemStateChanged
+       int a=JOptionPane.showConfirmDialog(null,"Are you sure you want edit calc Data? \n The changes will apply to all calculators"); 
+       
+        if(a==JOptionPane.YES_OPTION){  
+             jTextField1.setEnabled(true);
+             jTextField3.setEnabled(true);        
+        } else{
+              checkbox1.setState(false);
+             jTextField1.setEnabled(false);
+             jTextField3.setEnabled(false);
+        } 
+        
+        
+    }//GEN-LAST:event_checkbox1ItemStateChanged
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    public void inputValidation(){
+       jTextArea7.setDocument(new JTextFieldLimit(900));
+        jTextArea1.setDocument(new JTextFieldLimit(900));
+         jTextArea2.setDocument(new JTextFieldLimit(900));
+          jTextArea3.setDocument(new JTextFieldLimit(900));
+           jTextArea4.setDocument(new JTextFieldLimit(900));
+           jTextArea5.setDocument(new JTextFieldLimit(900));
+          jTextArea6.setDocument(new JTextFieldLimit(900));
+           jTextArea11.setDocument(new JTextFieldLimit(900));
+    }
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Checkbox checkbox1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JComboBox<Item> jComboBox1;
+    private javax.swing.JComboBox<Item> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea11;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextArea jTextArea7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    // End of variables declaration//GEN-END:variables
+
+    
+  
+    public String getSubsystemBreakdownCode(){
+    
+     return jTextField1.getText();
+    } 
+    
+    public void setSubsystemBreakdownCode(String breakdownCode){
+    
+    jTextField1.setText(breakdownCode);
+    } 
+    
+    public CalcFunctions getCalcFunction(){
+    
+     return calcFunctionsDao.findById(((Item)jComboBox1.getSelectedItem()).getId());
+    } 
+    
+    public void setCalcFunction(int calcFunId){
+    CalcFunctions cfun = calcFunctionsDao.findById(calcFunId);
+    Item functionalComponents = new Item(cfun.getCalcFunId(), cfun.getCalcFunction());
+    jComboBox1.setSelectedItem(functionalComponents);
+    } 
+    
+    public void setCalcFunction(CalcFunctions cfun){
+    Item functionalComponents = new Item(cfun.getCalcFunId(), cfun.getCalcFunction());
+    jComboBox1.setSelectedItem(functionalComponents);
+    } 
+    
+    public String getComponentText(){
+        System.out.println("jTextField2.getText() - "+jTextField2.getText()+" "+(jTextField2.getText()==null)+" "+jTextField2.getText().equals("")+" "+jTextField2.getText().isEmpty());
+        return jTextField2.getText();
+    }
+    
+    public void setComponentText(String comptext){
+        jTextField2.setText(comptext);
+    }
+    
+    public Calcfile getFunctionalComponents(){
+        Calcfile clf;
+        if (bottomUp) {
+            
+            clf = edit? clfile: new Calcfile();
+            clf.setCompId(getSubsystemBreakdownCode());
+            clf.setComponents(getComponentText());
+            clf.setFailureMode(getFailureMode());
+            
+        }else{
+            if (jComboBox3.getSelectedItem()!= null) {
+                clf= CalcfileDao.findById(((Item)jComboBox3.getSelectedItem()).getId());
+            } else {
+                clf = null;
+            }
+        }
+        
+        return clf;
+    } 
+    
+    public void setFunctionalComponents(int calcId){
+    Calcfile cfile = CalcfileDao.findById(calcId);
+        if (bottomUp) {
+            clfile = cfile;
+            setComponentText(clfile.getComponents());
+        }else{
+            Item functionalComponents = new Item(cfile.getCalcId(), cfile.getComponents());
+            jComboBox3.setSelectedItem(functionalComponents);
+        }
+    } 
+    
+    public void setFunctionalComponents(Calcfile cfile){
+        if (bottomUp) {
+            clfile = cfile;
+            setComponentText(clfile.getComponents());
+        }else{
+            Item functionalComponents = new Item(cfile.getCalcId(), cfile.getComponents());
+            jComboBox3.setSelectedItem(functionalComponents);
+        }
+    } 
+    
+    
+    public String getFunction(){
+    
+     return jTextArea7.getText();
+    } 
+    
+    public void setFunction(String function){
+    
+    jTextArea7.setText(function);
+    }
+    
+    /*public Item getSubProductGroup(){
+    
+     return (Item)jComboBox3.getSelectedItem();
+    } 
+    
+    public void setSubProductGroup(Item subProductGroup){
+    
+    jComboBox3.setSelectedItem(subProductGroup);
+    } 
+    
+
+    
+    public Calcfile getFunctionalComponents(){
+    
+     return CalcfileDao.findById(((Item)jComboBox3.getSelectedItem()).getId());
+    } 
+    
+    public void setFunctionalComponents(int calcId){
+    Calcfile cfile = CalcfileDao.findById(calcId);
+    Item functionalComponents = new Item(cfile.getCalcId(), cfile.getComponents());
+    jComboBox3.setSelectedItem(functionalComponents);
+    } 
+    
+    public void setFunctionalComponents(Calcfile cfile){
+    Item functionalComponents = new Item(cfile.getCalcId(), cfile.getComponents());
+    jComboBox3.setSelectedItem(functionalComponents);
+    } */
+
+    public String getPhase(){
+    
+      String res="";
+      
+        if (jCheckBox1.isSelected()) {
+            res=res+"UTO Mode,";
+        } if (jCheckBox2.isSelected()) {
+            res=res+"RM Mode,";
+        } if (jCheckBox3.isSelected()) {
+            res=res+"DM Mode,";
+        } if (jCheckBox4.isSelected()) {
+            res=res+"ATPM Mode";
+        }
+        
+     return res;
+    } 
+    
+    public void setPhase(String phase){
+     
+        if (phase != null) {
+            List<String> mode = Arrays.asList(phase.split("\\s*,\\s*"));
+      
+            if (mode.contains("UTO Mode")) {
+                jCheckBox1.setSelected(true);
+            } if (mode.contains("RM Mode")) {
+                 jCheckBox2.setSelected(true);
+            }  if (mode.contains("DM Mode")) {
+                 jCheckBox3.setSelected(true);
+            }  if (mode.contains("ATPM Mode")) {
+                 jCheckBox4.setSelected(true);
+            }  
+        }
+      
+    } 
+    
+    public String getFailureMode(){
+    
+     return jTextField3.getText();
+    } 
+    
+    public void setFailureMode(String failureMode){
+    
+    jTextField3.setText(failureMode);
+    } 
+    
+    public String getFailureCause(){
+    
+     return jTextArea4.getText();
+    } 
+    
+    public void setFailureCause(String failureCause){
+    
+    jTextArea4.setText(failureCause);
+    } 
+    
+    public String getLocalSystemLevel(){
+    
+     return jTextArea1.getText();
+    } 
+    
+    public void setLocalSystemLevel(String localSystemLevel){
+    
+    jTextArea1.setText(localSystemLevel);
+    } 
+    
+    public String getTrainSubsystemLevel(){
+    
+     return jTextArea2.getText();
+    } 
+    
+    public void setTrainSubsystemLevel(String trainSubsystemLevel){
+    
+    jTextArea2.setText(trainSubsystemLevel);
+    } 
+    
+    public String getTrainLevel(){
+    
+     return jTextArea3.getText();
+    } 
+    
+    public void setTrainLevel(String trainLevel){
+    
+    jTextArea3.setText(trainLevel);
+    } 
+    
+
+    
+    public String getFailureDetection(){
+    
+     return jTextArea5.getText();
+    } 
+    
+    public void setFailureDetection(String importance){
+    
+    jTextArea5.setText(importance);
+    } 
+    
+    public String getPreventiveMeasures(){
+    
+     return jTextArea6.getText();
+    } 
+    
+    public void setPreventiveMeasures(String preventiveMeasures){
+    
+    jTextArea6.setText(preventiveMeasures);
+    }
+    
+
+    public String getServerityClass(){
+    
+     return jComboBox5.getSelectedItem()+"";
+    } 
+    
+    public void setServerityClass(String serverity){
+    
+    jComboBox5.setSelectedItem(serverity);
+    }
+    
+    /*public int getServerityClass(){
+    
+     return jComboBox5.getSelectedIndex()+1;
+    } 
+    
+    public void setServerityClass(int serverity){
+    
+    jComboBox5.setSelectedIndex(serverity-1);
+    }*/
+    
+    
+    
+    public String getRemarks(){
+    
+     return jTextArea11.getText();
+    } 
+    
+    public void setRemarks(String remarks){
+    
+    jTextArea11.setText(remarks);
+    }
+    
+    
+    public static void main(String[] args) {
+        
+                
+        JFrame frame = new JFrame("DropDemo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        List<Integer> addedList = Arrays.asList(new Integer[]{0,1,2,3,4,5});
+
+        frame.setContentPane(new FmeaMil1629APopup(19,addedList,true,true));
+ 
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+   
+     
+    public boolean getCalcEdit(){
+      return checkbox1.getState();
+    }
+    
+    public void resetData(){
+    
+        checkbox1.setState(false);
+        jTextField1.setText("");
+        jComboBox1.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+        jTextArea7.setText("");
+        jCheckBox1.setSelected(false);
+        jCheckBox2.setSelected(false);
+        jCheckBox3.setSelected(false);
+        jCheckBox4.setSelected(false);
+        jTextArea4.setText("");
+        jTextArea1.setText("");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea5.setText("");
+        jTextArea6.setText("");
+        jTextArea11.setText("");
+        jComboBox5.setSelectedIndex(0);
+    
+    }
+    
+    
+    public void setValidationMessage(String message){
+       jLabel4.setText(message);
+    
+    }
+    
+     public String getValidationMessage(){
+       return jLabel4.getText();
+    }
+}

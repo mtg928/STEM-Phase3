@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+    
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/tcl?serverTimezone=UTC</property>
+        <!--<property name="hibernate.cache.auto_evict_collection_cache">true</property>  -->
+        <property name="format_sql">true</property>
+        <property name="show_sql">true</property>
+        
+        <mapping class="com.topfield.modal.Student" />
+        <mapping class="com.topfield.modal.MainProductGroup" />
+        <mapping class="com.topfield.modal.SubProductGroup" />
+        <mapping class="com.topfield.modal.SubProductFunctions" />
+        <mapping class="com.topfield.modal.Components" />
+        <mapping class="com.topfield.modal.Fmea" />
+        <mapping class="com.topfield.modal.MainProductComponents" />
+        <mapping class="com.topfield.modal.SubProductComponents" />
+        <mapping class="com.topfield.modal.TclProjects" />
+        <mapping class="com.topfield.modal.UserRoles" />
+        <mapping class="com.topfield.modal.Users" />
+        <mapping class="com.topfield.modal.Fmeca" />
+        <mapping class="com.topfield.modal.Test1" />
+        <mapping class="com.topfield.modal.Ccf" />
+        <mapping class="com.topfield.modal.Sil" />
+        <mapping class="com.topfield.modal.Hazid" />
+        <mapping class="com.topfield.modal.Hazards" />
+        <mapping class="com.topfield.modal.Eventtree" />
+        <mapping class="com.topfield.modal.Faultdata" />
+        <mapping class="com.topfield.modal.Faulttree" />
+        <mapping class="com.topfield.modal.Functionalfailures" />
+        <mapping class="com.topfield.modal.Mpghdr" />
+        <mapping class="com.topfield.modal.Standards" />
+        <mapping class="com.topfield.modal.Spchdr" />
+        <mapping class="com.topfield.modal.Spfhdr" />
+        <mapping class="com.topfield.modal.Spghdr" />
+        <mapping class="com.topfield.modal.Ccfhdr" /> 
+        <mapping class="com.topfield.modal.Eventtreehdr" />
+        <mapping class="com.topfield.modal.Failuredata" />
+        <mapping class="com.topfield.modal.Failuremodes" />
+        <mapping class="com.topfield.modal.Datarefer" />
+        <mapping class="com.topfield.modal.Graphvertex" />
+        <mapping class="com.topfield.modal.Graphedge" />
+        <mapping class="com.topfield.modal.MainProductFunctions" />
+        <mapping class="com.topfield.modal.CalcFunctions" />        
+        <mapping class="com.topfield.modal.Calcfile" />
+        <mapping class="com.topfield.modal.Packages" />
+        <mapping class="com.topfield.modal.Notification" />
+        <mapping class="com.topfield.modal.Assumptions" />
+        <mapping class="com.topfield.modal.Calchdr" />
+    </session-factory>
+</hibernate-configuration>
