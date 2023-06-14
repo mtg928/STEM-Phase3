@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.mycompany_STEMS_GUII_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.topfield.modal.Fmeca</class>
+    <class>com.topfield.modal.Users</class>
+    <class>com.topfield.modal.SubProductGroup</class>
+    <class>com.topfield.modal.Ccf</class>
+    <class>com.topfield.modal.Hazid</class>
+    <class>com.topfield.modal.Level2</class>
+    <class>com.topfield.modal.UserRoles</class>
+    <class>com.topfield.modal.TclProjects</class>
+    <class>com.topfield.modal.MainProductGroup</class>
+    <class>com.topfield.modal.SubProductFunctions</class>
+    <class>com.topfield.modal.Sil</class>
+    <class>com.topfield.modal.Student</class>
+    <class>com.topfield.modal.Faulttree</class>
+    <class>com.topfield.modal.FaultTreeAnalysis</class>
+    <class>com.topfield.modal.Test1</class>
+    <class>com.topfield.modal.SubProductComponents</class>
+    <class>com.topfield.modal.Components</class>
+    <class>com.topfield.modal.MainProductComponents</class>
+    <class>com.topfield.modal.Faultdata</class>
+    <class>com.topfield.modal.Hazards</class>
+    <class>com.topfield.modal.Fmea</class>
+    <class>com.topfield.modal.SystemExample</class>
+    <class>com.topfield.modal.Eventtree</class>
+    <class>com.topfield.modal.Functionalfailures</class>
+    <class>com.topfield.modal.Standards</class>
+    <class>com.topfield.modal.Mpghdr</class>
+    <class>com.topfield.modal.Spchdr</class>
+    <class>com.topfield.modal.Spghdr</class>
+    <class>com.topfield.modal.Function1</class>
+    <class>com.topfield.modal.Ccfhdr</class>
+    <class>com.topfield.modal.FmecaTemplate</class>
+    <class>com.topfield.modal.EventTreeHdr</class>
+    <class>com.topfield.modal.References</class>
+    <class>com.topfield.modal.Failuremodes</class>
+    <class>com.topfield.modal.Failuredata</class>
+    <class>com.topfield.modal.Eventtreehdr</class>
+    <class>com.topfield.modal.Datarefer</class>
+    <class>com.topfield.modal.Graphedge</class>
+    <class>com.topfield.modal.Graphvertex</class>
+    <class>com.topfield.modal.MainProductFunctions</class>
+    <class>com.topfield.modal.Calcfile</class>
+    <class>com.topfield.modal.CalcFunctions</class>
+    <class>com.topfield.modal.Spfhdr</class>
+    <class>com.topfield.modal.Notification</class>
+    <class>com.topfield.modal.Packages</class>
+    <class>com.topfield.modal.Assumptions</class>
+    <class>com.topfield.modal.Calchdr</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://aa109eul1oevhc.cg3nanv6th3s.us-east-1.rds.amazonaws.com:3306/tcl_systems?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="a3rdMan928"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="sC0opYdoo928"/>
+    </properties>
+  </persistence-unit>
+</persistence>

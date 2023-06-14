@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author Murali
+ * @author MalcolmH
+ * Multiple named queries in FMEA table
  */
 @Entity
 @Table(name = "fmea")

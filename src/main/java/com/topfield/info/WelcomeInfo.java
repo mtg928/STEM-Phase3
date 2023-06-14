@@ -18,7 +18,11 @@ import javax.swing.JButton;
 public class WelcomeInfo extends javax.swing.JPanel {
 
     /**
-     * Creates new form welcomeInfo
+     * Creates new form welcomeInfo page
+     * Button#2 links to the STEMS Overview
+     * Button#3 links to the Tutorials
+     * Button#4 links to the Sample projects
+     * Button#5 links to the Manuals
      */
     public WelcomeInfo() {
         initComponents();

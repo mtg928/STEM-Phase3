@@ -227,9 +227,9 @@ public class FmeaMil1629APopup extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setText("Failure mode");
+        jLabel8.setText("Failure Mode");
 
-        jLabel7.setText("Phase");
+        jLabel7.setText("Operating Phase");
 
         jLabel9.setBackground(new java.awt.Color(153, 153, 153));
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

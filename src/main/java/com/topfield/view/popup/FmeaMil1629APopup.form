@@ -286,12 +286,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Failure mode"/>
+                <Property name="text" type="java.lang.String" value="Failure Mode"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Phase"/>
+                <Property name="text" type="java.lang.String" value="Operating Phase"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
