@@ -110,13 +110,11 @@ public class Evacuation_From extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(102, 102, 102));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(214, 234, 248)));
-        setForeground(new java.awt.Color(0, 0, 0));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(600, 493));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Egress Capacity * ");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 160, -1));
 
@@ -132,12 +130,10 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 160, -1));
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Clear Door Width *");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 160, -1));
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Door opening time *");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 160, -1));
 
@@ -145,7 +141,6 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 160, -1));
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Type of train");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, 160, -1));
 
@@ -157,12 +152,10 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 150, -1));
 
         jLabel6.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Types of disaster");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 83, 160, -1));
 
         jLabel7.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Number of Cars");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, 160, -1));
 
@@ -174,7 +167,6 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 102, 150, 20));
 
         jLabel8.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Number of Passengers *");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 160, -1));
 
@@ -187,7 +179,6 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 100, -1));
 
         jLabel9.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Number of Available doors *");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 160, -1));
 
@@ -200,24 +191,20 @@ public class Evacuation_From extends javax.swing.JPanel {
         add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 100, -1));
 
         jLabel10.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Clear Door Width (mm)");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 160, -1));
         add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 100, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("First Class");
+        jLabel11.setText("Car 1");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 85, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText(" Family Class");
+        jLabel12.setText("Car 2");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 85, -1));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("SingleClass");
+        jLabel13.setText("Car 3");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 85, -1));
 
         jTextField10.setText("191");
@@ -260,7 +247,6 @@ public class Evacuation_From extends javax.swing.JPanel {
         jLabel14.setRequestFocusEnabled(false);
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("s");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 116, -1));
 
@@ -275,11 +261,8 @@ public class Evacuation_From extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 170, -1));
 
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 466, 269, -1));
-
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(684, 466, 51, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TIME CRITICAL", "NON TIME CRITICAL" }));
@@ -311,11 +294,9 @@ public class Evacuation_From extends javax.swing.JPanel {
         jLabel20.setOpaque(true);
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 100, 24));
 
-        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Person/mm- min");
         add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 116, -1));
 
-        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("mm");
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 116, -1));
 
