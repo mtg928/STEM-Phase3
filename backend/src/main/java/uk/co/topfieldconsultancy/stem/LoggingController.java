@@ -1,4 +1,4 @@
-package uk.co.topfieldconsultancy.stem.application.fmeca;
+package uk.co.topfieldconsultancy.stem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
