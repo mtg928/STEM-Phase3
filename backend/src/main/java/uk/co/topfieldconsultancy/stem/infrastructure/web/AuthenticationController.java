@@ -13,6 +13,10 @@ import uk.co.topfieldconsultancy.stem.application.AuthenticationApplication;
 
 @RestController
 public class AuthenticationController {
+    public static final String RESET_PASSWORD_FAILED = "reset password failed";
+    public static final String REGISTRATION_FAILED = "registration failed";
+    public static final String LOGIN_FAILED = "login failed";
+    public static final String ACCESS_TOKEN = "access_token";
     Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
@@ -24,8 +28,8 @@ public class AuthenticationController {
         boolean loggedIn = authenticationApplication.login(loginRequest);
 
         return loggedIn ?
-                ResponseEntity.ok(LoginResponse.builder().success(true).access_token("access_token").build()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error("login failed").error_message("login_failed").build());
+                ResponseEntity.ok(LoginResponse.builder().success(true).access_token(ACCESS_TOKEN).build()) :
+                ResponseEntity.badRequest().body(ErrorResponse.builder().error(LOGIN_FAILED).error_message(LOGIN_FAILED).build());
     }
 
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
@@ -34,7 +38,7 @@ public class AuthenticationController {
         boolean registered = authenticationApplication.register(registerRequest);
         return registered ?
                 ResponseEntity.ok(new RegisterResponse()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error("registration failed").error_message("registration_failed").build());
+                ResponseEntity.badRequest().body(ErrorResponse.builder().error(REGISTRATION_FAILED).error_message(REGISTRATION_FAILED).build());
     }
 
     @RequestMapping(value = "/auth/resetPassword", method = RequestMethod.POST)
@@ -43,7 +47,7 @@ public class AuthenticationController {
         boolean passwordReseted = authenticationApplication.resetPassword(resetPassword);
         return passwordReseted ?
                 ResponseEntity.ok(new ResetPasswordResponse()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error("reset password failed").error_message("reset password failed").build());
+                ResponseEntity.badRequest().body(ErrorResponse.builder().error(RESET_PASSWORD_FAILED).error_message(RESET_PASSWORD_FAILED).build());
     }
 
     @NoArgsConstructor
