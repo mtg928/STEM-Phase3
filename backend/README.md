@@ -39,30 +39,84 @@ The STEM Upgrade Project is committed to delivering a more polished, user-centri
 
 ## Project Structure
 
-- `/src`: Contains the source code files.
-- `/lib`: Stores external libraries and dependencies.
-- `/docs`: Documentation and user guides.
+- `backend/src`: Contains the source code files for backend.
+- `frontend/src`: Contains the source code files for frontend.
+- `backend/docs`: Documentation and user guides for backend.
 
 ## Installation and Dependencies
 
-
-
-## Usage
-
-1. Include the library in your Java project.
-2. Import the necessary classes:
-
+- `mvn clean install`
+- `docker-compose up`
+- `java -jar stem.jar`
 ## Documentation
+### Backend
+#### Authentication API
+
+***POST /auth/login***
+
+    {
+        "email":"exampleUsername",
+        "password":"examplePasswordHashed"
+    }
+*Response OK*
+
+ 
+    {
+        "success":"true",
+        "access_token":"exampleUsername"
+    }
+*Response Error*
+
+
+    {
+        "success":"false",
+        "error":"anyError",
+        "error_message":"messageForClientToShow"
+    }
+
+***POST /auth/register***
+
+
+    {
+        "email":"exampleUsername"
+    }
+
+*Response OK*
+
+
+    {
+        "success":"true"
+    }
+*Response Error*
+
+
+    {
+        "success":"false",        
+        "error":"anyError",
+        "error_message":"messageForClientToShow"
+    }
+***POST /auth/resetPassword***
 
 
 
-## Contributing
+    {
+        "email":"exampleUsername"
+    }
 
-1. Fork the project.
-2. Create a new branch: `git checkout -b feature/your-feature`.
-3. Make changes and commit: `git commit -m 'Add new feature'`.
-4. Push your branch: `git push origin feature/your-feature`.
-5. Create a pull request.
+*Response OK*
+
+
+    {
+        "success":"true"
+    }
+*Response Error*
+
+
+    {
+        "success":"false",        
+        "error":"anyError",
+        "error_message":"messageForClientToShow"
+    }
 
 ## License
 
@@ -71,5 +125,3 @@ This project is licensed under the [GNU General Public License v3.0]
 ## Contact
 
 If you have questions or need assistance, please feel free to contact us at malcolm.harris@topfieldconsultancy.co.uk![image](https://github.com/mtg928/STEM-Phase3/assets/41808296/b8b80ce3-7e74-49c9-9162-25466ccf1601)
-
-
