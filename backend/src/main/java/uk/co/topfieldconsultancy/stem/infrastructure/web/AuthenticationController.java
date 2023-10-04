@@ -28,8 +28,15 @@ public class AuthenticationController {
         boolean loggedIn = authenticationApplication.login(loginRequest);
 
         return loggedIn ?
-                ResponseEntity.ok(LoginResponse.builder().success(true).access_token(ACCESS_TOKEN).build()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error(LOGIN_FAILED).error_message(LOGIN_FAILED).build());
+                ResponseEntity.ok(LoginResponse.builder()
+                        .success(true)
+                        .access_token(ACCESS_TOKEN)
+                        .build()) :
+                ResponseEntity.badRequest()
+                        .body(ErrorResponse.builder()
+                                .error(LOGIN_FAILED)
+                                .error_message(LOGIN_FAILED)
+                                .build());
     }
 
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
@@ -38,7 +45,11 @@ public class AuthenticationController {
         boolean registered = authenticationApplication.register(registerRequest);
         return registered ?
                 ResponseEntity.ok(new RegisterResponse()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error(REGISTRATION_FAILED).error_message(REGISTRATION_FAILED).build());
+                ResponseEntity.badRequest()
+                        .body(ErrorResponse.builder()
+                                .error(REGISTRATION_FAILED)
+                                .error_message(REGISTRATION_FAILED)
+                                .build());
     }
 
     @RequestMapping(value = "/auth/resetPassword", method = RequestMethod.POST)
@@ -47,7 +58,11 @@ public class AuthenticationController {
         boolean passwordReseted = authenticationApplication.resetPassword(resetPassword);
         return passwordReseted ?
                 ResponseEntity.ok(new ResetPasswordResponse()) :
-                ResponseEntity.badRequest().body(ErrorResponse.builder().error(RESET_PASSWORD_FAILED).error_message(RESET_PASSWORD_FAILED).build());
+                ResponseEntity.badRequest()
+                        .body(ErrorResponse.builder()
+                                .error(RESET_PASSWORD_FAILED)
+                                .error_message(RESET_PASSWORD_FAILED)
+                                .build());
     }
 
     @NoArgsConstructor
@@ -84,16 +99,6 @@ public class AuthenticationController {
         private boolean success = true;
     }
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    @Setter
-    public static class ErrorResponse {
-        private boolean success = false;
-        private String error;
-        private String error_message;
-    }
 
     @NoArgsConstructor
     @Getter
