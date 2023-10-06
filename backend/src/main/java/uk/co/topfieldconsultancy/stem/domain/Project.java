@@ -26,6 +26,7 @@ public class Project {
     private String comments;
     private LocalDateTime createdDate;
     private LocalDateTime lastUpdated;
+    private String label;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

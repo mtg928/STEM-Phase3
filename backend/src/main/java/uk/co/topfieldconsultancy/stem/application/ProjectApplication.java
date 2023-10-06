@@ -29,6 +29,7 @@ public class ProjectApplication {
                 .comments(createProjectRequest.getComments())
                 .status(createProjectRequest.getStatus())
                 .owner(createProjectRequest.getOwner())
+                .label(createProjectRequest.getLabel())
                 .build());
         return saved;
     }
@@ -55,6 +56,7 @@ public class ProjectApplication {
         projectToUpdate.setComments(updateProjectRequest.getComments());
         projectToUpdate.setOwner(updateProjectRequest.getOwner());
         projectToUpdate.setStatus(updateProjectRequest.getStatus());
+        projectToUpdate.setLabel(updateProjectRequest.getLabel());
 
         Project saved = projectRepository.save(projectToUpdate);
         return saved;
