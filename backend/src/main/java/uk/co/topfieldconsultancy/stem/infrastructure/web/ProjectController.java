@@ -36,6 +36,7 @@ public class ProjectController {
                     .status(createdProject.getStatus())
                     .createdDate(createdProject.getCreatedDate())
                     .lastUpdated(createdProject.getLastUpdated())
+                    .label(createdProject.getLabel())
                     .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
@@ -60,6 +61,7 @@ public class ProjectController {
                     .comments(projectForUser.getComments())
                     .owner(projectForUser.getOwner())
                     .status(projectForUser.getStatus())
+                    .label(projectForUser.getLabel())
                     .createdDate(projectForUser.getCreatedDate())
                     .lastUpdated(projectForUser.getLastUpdated())
                     .build());
@@ -90,6 +92,7 @@ public class ProjectController {
                             .status(project.getStatus())
                             .createdDate(project.getCreatedDate())
                             .lastUpdated(project.getLastUpdated())
+                            .label(project.getLabel())
                             .build())
                     .collect(Collectors.toList()));
 
@@ -119,6 +122,7 @@ public class ProjectController {
                     .status(updatedProject.getStatus())
                     .createdDate(updatedProject.getCreatedDate())
                     .lastUpdated(updatedProject.getLastUpdated())
+                    .label(updatedProject.getLabel())
                     .build());
 
         } catch (Exception e) {
@@ -156,6 +160,7 @@ public class ProjectController {
         private String description;
         private String client;
         private String owner;
+        private String label;
         private String status;
         private String comments;
     }
@@ -175,6 +180,7 @@ public class ProjectController {
         private String owner;
         private String status;
         private String comments;
+        private String label;
         private LocalDateTime createdDate;
         private LocalDateTime lastUpdated;
     }
@@ -192,6 +198,7 @@ public class ProjectController {
         private String owner;
         private String status;
         private String comments;
+        private String label;
         private LocalDateTime createdDate;
         private LocalDateTime lastUpdated;
     }
