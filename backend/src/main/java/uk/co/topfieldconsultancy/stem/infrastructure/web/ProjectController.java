@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uk.co.topfieldconsultancy.stem.application.ProjectApplication;
 import uk.co.topfieldconsultancy.stem.domain.Project;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,12 +29,20 @@ public class ProjectController {
                     .name(createdProject.getName())
                     .type(createdProject.getType())
                     .abbreviation(createdProject.getAbbreviation())
-                    .description(createdProject.getDescription()).build());
+                    .description(createdProject.getDescription())
+                    .client(createdProject.getClient())
+                    .comments(createdProject.getComments())
+                    .owner(createdProject.getOwner())
+                    .status(createdProject.getStatus())
+                    .createdDate(createdProject.getCreatedDate())
+                    .lastUpdated(createdProject.getLastUpdated())
+                    .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
                             .error(e.getLocalizedMessage())
-                            .error_message("Project was not created. Please try later.").build());
+                            .error_message("Project was not created. Please try later.")
+                            .build());
         }
     }
 
@@ -46,12 +55,20 @@ public class ProjectController {
                     .name(projectForUser.getName())
                     .type(projectForUser.getType())
                     .abbreviation(projectForUser.getAbbreviation())
-                    .description(projectForUser.getDescription()).build());
+                    .description(projectForUser.getDescription())
+                    .client(projectForUser.getClient())
+                    .comments(projectForUser.getComments())
+                    .owner(projectForUser.getOwner())
+                    .status(projectForUser.getStatus())
+                    .createdDate(projectForUser.getCreatedDate())
+                    .lastUpdated(projectForUser.getLastUpdated())
+                    .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
                             .error(e.getLocalizedMessage())
-                            .error_message("Project was not found. Please check your id.").build());
+                            .error_message("Project was not found. Please check your id.")
+                            .build());
         }
     }
 
@@ -66,13 +83,22 @@ public class ProjectController {
                             .name(project.getName())
                             .type(project.getType())
                             .abbreviation(project.getAbbreviation())
-                            .description(project.getDescription()).build()).collect(Collectors.toList()));
+                            .description(project.getDescription())
+                            .client(project.getClient())
+                            .comments(project.getComments())
+                            .owner(project.getOwner())
+                            .status(project.getStatus())
+                            .createdDate(project.getCreatedDate())
+                            .lastUpdated(project.getLastUpdated())
+                            .build())
+                    .collect(Collectors.toList()));
 
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
                             .error(e.getLocalizedMessage())
-                            .error_message("Searching for projects was not successfull!").build());
+                            .error_message("Searching for projects was not successfull!")
+                            .build());
         }
     }
 
@@ -86,13 +112,21 @@ public class ProjectController {
                     .name(updatedProject.getName())
                     .type(updatedProject.getType())
                     .abbreviation(updatedProject.getAbbreviation())
-                    .description(updatedProject.getDescription()).build());
+                    .description(updatedProject.getDescription())
+                    .client(updatedProject.getClient())
+                    .comments(updatedProject.getComments())
+                    .owner(updatedProject.getOwner())
+                    .status(updatedProject.getStatus())
+                    .createdDate(updatedProject.getCreatedDate())
+                    .lastUpdated(updatedProject.getLastUpdated())
+                    .build());
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
                             .error(e.getLocalizedMessage())
-                            .error_message("Project was not found. Please check your id.").build());
+                            .error_message("Project was not found. Please check your id.")
+                            .build());
         }
     }
 
@@ -100,13 +134,15 @@ public class ProjectController {
     public ResponseEntity deleteProject(@PathVariable("id") Long id) {
         try {
             boolean isProjectDeleted = projectApplication.delete(id, Long.valueOf(1));
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok()
+                    .build();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
                             .error(e.getLocalizedMessage())
-                            .error_message("Project was not found. Please check your id.").build());
+                            .error_message("Project was not found. Please check your id.")
+                            .build());
         }
     }
 
@@ -118,6 +154,10 @@ public class ProjectController {
         private String type;
         private String abbreviation;
         private String description;
+        private String client;
+        private String owner;
+        private String status;
+        private String comments;
     }
 
     @NoArgsConstructor
@@ -131,6 +171,12 @@ public class ProjectController {
         private String type;
         private String abbreviation;
         private String description;
+        private String client;
+        private String owner;
+        private String status;
+        private String comments;
+        private LocalDateTime createdDate;
+        private LocalDateTime lastUpdated;
     }
 
     @NoArgsConstructor
@@ -142,6 +188,12 @@ public class ProjectController {
         private String type;
         private String abbreviation;
         private String description;
+        private String client;
+        private String owner;
+        private String status;
+        private String comments;
+        private LocalDateTime createdDate;
+        private LocalDateTime lastUpdated;
     }
 
 
