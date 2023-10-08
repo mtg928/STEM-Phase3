@@ -24,45 +24,47 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
-
-        boolean loggedIn = authenticationApplication.login(loginRequest);
-
-        return loggedIn ?
-                ResponseEntity.ok(LoginResponse.builder()
-                        .success(true)
-                        .access_token(ACCESS_TOKEN)
-                        .build()) :
-                ResponseEntity.badRequest()
-                        .body(ErrorResponse.builder()
-                                .error(LOGIN_FAILED)
-                                .error_message(LOGIN_FAILED)
-                                .build());
+        try {
+            String jwt = authenticationApplication.login(loginRequest);
+            return ResponseEntity.ok(LoginResponse.builder()
+                    .success(true)
+                    .access_token(jwt)
+                    .build());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest()
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message(LOGIN_FAILED)
+                            .build());
+        }
     }
 
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
     public ResponseEntity register(@RequestBody RegisterRequest registerRequest) {
-
-        boolean registered = authenticationApplication.register(registerRequest);
-        return registered ?
-                ResponseEntity.ok(new RegisterResponse()) :
-                ResponseEntity.badRequest()
-                        .body(ErrorResponse.builder()
-                                .error(REGISTRATION_FAILED)
-                                .error_message(REGISTRATION_FAILED)
-                                .build());
+        try {
+            boolean registered = authenticationApplication.register(registerRequest);
+            return ResponseEntity.ok(new RegisterResponse());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest()
+                    .body(ErrorResponse.builder()
+                            .error(REGISTRATION_FAILED)
+                            .error_message(exception.getLocalizedMessage())
+                            .build());
+        }
     }
 
     @RequestMapping(value = "/auth/resetPassword", method = RequestMethod.POST)
     public ResponseEntity resetPassword(@RequestBody ResetPasswordRequest resetPassword) {
-
-        boolean passwordReseted = authenticationApplication.resetPassword(resetPassword);
-        return passwordReseted ?
-                ResponseEntity.ok(new ResetPasswordResponse()) :
-                ResponseEntity.badRequest()
-                        .body(ErrorResponse.builder()
-                                .error(RESET_PASSWORD_FAILED)
-                                .error_message(RESET_PASSWORD_FAILED)
-                                .build());
+        try {
+            boolean passwordReseted = authenticationApplication.resetPassword(resetPassword);
+            return ResponseEntity.ok(new ResetPasswordResponse());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest()
+                    .body(ErrorResponse.builder()
+                            .error(RESET_PASSWORD_FAILED)
+                            .error_message(exception.getLocalizedMessage())
+                            .build());
+        }
     }
 
     @NoArgsConstructor
@@ -88,6 +90,7 @@ public class AuthenticationController {
     @Setter
     public static class RegisterRequest {
         private String email;
+        private String password;
     }
 
     @NoArgsConstructor
