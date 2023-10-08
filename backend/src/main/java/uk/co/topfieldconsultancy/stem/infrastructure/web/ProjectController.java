@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uk.co.topfieldconsultancy.stem.application.AuthenticationApplication;
 import uk.co.topfieldconsultancy.stem.application.ProjectApplication;
 import uk.co.topfieldconsultancy.stem.domain.Project;
+import uk.co.topfieldconsultancy.stem.domain.exception.AuthorizationException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/projects", method = RequestMethod.POST)
     public ResponseEntity createProject(@RequestBody CreateProjectRequest createProjectRequest, @RequestHeader(value = "Authorization") String authorizationHeader) {
+        logger.info("Creating project");
         try {
             Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
             Project createdProject = projectApplication.create(createProjectRequest, userId);
@@ -70,6 +72,12 @@ public class ProjectController {
                     .createdDate(projectForUser.getCreatedDate())
                     .lastUpdated(projectForUser.getLastUpdated())
                     .build());
+        } catch (AuthorizationException exception) {
+            return ResponseEntity.status(401)
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message("Please login again!")
+                            .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
@@ -102,6 +110,12 @@ public class ProjectController {
                             .build())
                     .collect(Collectors.toList()));
 
+        } catch (AuthorizationException exception) {
+            return ResponseEntity.status(401)
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message("Please login again!")
+                            .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
@@ -132,6 +146,12 @@ public class ProjectController {
                     .label(updatedProject.getLabel())
                     .build());
 
+        } catch (AuthorizationException exception) {
+            return ResponseEntity.status(401)
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message("Please login again!")
+                            .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()
@@ -149,6 +169,12 @@ public class ProjectController {
             return ResponseEntity.ok()
                     .build();
 
+        } catch (AuthorizationException exception) {
+            return ResponseEntity.status(401)
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message("Please login again!")
+                            .build());
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponse.builder()

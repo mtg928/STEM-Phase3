@@ -1,6 +1,7 @@
 package uk.co.topfieldconsultancy.stem.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import uk.co.topfieldconsultancy.stem.domain.User;
 import uk.co.topfieldconsultancy.stem.domain.UserRepository;
@@ -20,25 +21,27 @@ public class AuthenticationApplication {
     EmailApplication emailApplication;
 
     public String login(AuthenticationController.LoginRequest loginRequest) {
-        //TODO: check in the database for user and return access_token
         User userFoundByEmail = userRepository.findByEmail(loginRequest.getEmail());
-        if (userFoundByEmail == null || !loginRequest.getPassword()
-                .equalsIgnoreCase(userFoundByEmail.getHashedPassword())) {
+        SCryptPasswordEncoder encoder = new SCryptPasswordEncoder(16384, 8, 4, 32, 64);
+        if (userFoundByEmail == null ||  !encoder.matches(loginRequest.getPassword(), userFoundByEmail.getHashedPassword())) {
             throw new IllegalArgumentException("User not found");
         }
 
-        String jwt = jwtApplication.createJWT(userFoundByEmail.getRoles(), userFoundByEmail.getId());
+        String jwt = jwtApplication.createJWT(userFoundByEmail.getEmail(), userFoundByEmail.getName(), userFoundByEmail.getRoles(), userFoundByEmail.getId());
         return jwt;
     }
 
     public boolean register(AuthenticationController.RegisterRequest registerRequest) {
-        //TODO: register a user
-        // and send an email with a password
-        //TODO: hash password
-        String generatedPassword = "generatedPassword";
+        // TODO: and send an email with a password
+        User userFoundByEmail = userRepository.findByEmail(registerRequest.getEmail());
+        if (userFoundByEmail != null) {
+            throw new IllegalArgumentException("Email already used!");
+        }
+        SCryptPasswordEncoder encoder = new SCryptPasswordEncoder(16384, 8, 4, 32, 64);
+        var encodedPassword = encoder.encode(registerRequest.getPassword());
         userRepository.save(User.builder()
                 .email(registerRequest.getEmail())
-                .hashedPassword(generatedPassword)
+                .hashedPassword(encodedPassword)
                 .roles(new String[]{"USER"})
                 .activated(true)
                 .build());
@@ -48,7 +51,7 @@ public class AuthenticationApplication {
     }
 
     public boolean resetPassword(AuthenticationController.ResetPasswordRequest resetPassword) {
-        //TODO: send an email with a password
+        //TODO: send an email with a new password
 
         User userFoundByEmail = userRepository.findByEmail(resetPassword.getEmail());
         if (userFoundByEmail == null) {

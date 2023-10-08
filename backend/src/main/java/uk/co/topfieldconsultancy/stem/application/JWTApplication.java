@@ -10,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.topfieldconsultancy.stem.domain.StemConfig;
 import uk.co.topfieldconsultancy.stem.domain.UserRepository;
+import uk.co.topfieldconsultancy.stem.domain.exception.AuthorizationException;
 
 import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 @Component
 public class JWTApplication {
@@ -24,11 +29,11 @@ public class JWTApplication {
 
 
     @PostConstruct
-    public void init(){
+    public void init() {
         key = Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(stemConfig.getSigningKey()));
     }
 
-    public String createJWT(String[] roles, Long userId) {
+    public String createJWT(String email, String name, String[] roles, Long userId) {
 
         JwtBuilder jwtBuilder = Jwts.builder()
                 .header()
@@ -36,21 +41,26 @@ public class JWTApplication {
                 .and()
                 .subject(String.valueOf(userId))
                 .claim("roles", String.join(",", roles))
+                .claim("email", email)
+                .claim("name", name)
+                .expiration(Date.from(LocalDateTime.now()
+                        .plusDays(1)
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant()))
                 .signWith(key);
 
         return jwtBuilder.compact();
     }
 
-    private boolean isAuthenticated(String jwt) {
-
+    private void isAuthenticated(String jwt) {
         try {
             Jwts.parser()
                     .verifyWith(key)
                     .build()
                     .parse(jwt);
-            return true;
+
         } catch (JwtException ex) {   // (5)
-            return false;
+            throw new AuthorizationException("JWT is not valid");
         }
     }
 
@@ -68,7 +78,7 @@ public class JWTApplication {
                     .getSubject();
             return Long.parseLong(userId);
         } catch (JwtException ex) {   // (5)
-            throw new IllegalArgumentException("UserId could not be read from JWT");
+            throw new AuthorizationException("UserId could not be read from JWT");
         }
     }
 
