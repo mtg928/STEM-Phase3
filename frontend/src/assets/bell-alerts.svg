@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="20px" viewBox="0 0 16 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>NotificationsOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FMECA-Calculator-1.1" transform="translate(-1180.000000, -25.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-21" transform="translate(1180.000000, 5.000000)">
+                <g id="Top-icons-comments/-Help" transform="translate(0.000000, 19.000000)">
+                    <path d="M8.00000002,20.5000001 C9.10000004,20.5000001 10,19.6000001 10,18.5000001 L6.00000002,18.5000001 C6.00000002,19.6000001 6.90000003,20.5000001 8.00000002,20.5000001 Z M14,14.5 L14,9.5 C14,6.43000002 12.3700001,3.86000001 9.5,3.18000001 L9.5,2.5 C9.5,1.67 8.83000004,1 8,1 C7.17000003,1 6.5,1.67 6.5,2.5 L6.5,3.18000001 C3.64000002,3.86000001 2,6.42000002 2,9.5 L2,14.5 L0,16.5 L0,17.5 L16,17.5 L16,16.5 L14,14.5 Z M12,15.5 L4.00000002,15.5 L4.00000002,9.50000002 C4.00000002,7.02000003 5.51000002,5.00000002 8.00000002,5.00000002 C10.49,5.00000002 12,7.02000003 12,9.50000002 L12,15.5 Z" id="NotificationsOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

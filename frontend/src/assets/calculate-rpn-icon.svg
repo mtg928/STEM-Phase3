@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>RefreshOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FMECA-Calculator-1.1" transform="translate(-1471.000000, -300.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Group-22" transform="translate(1445.000000, 292.000000)">
+                <g id="Group-18" transform="translate(26.000000, 8.000000)">
+                    <path d="M13.6399901,2.35000001 C12.1899901,0.900000004 10.19999,0 7.98999003,0 C3.57000001,0 0,3.58000001 0,8 C0,12.4200001 3.57000001,16 7.98999003,16 C11.71999,16 14.8299901,13.4500001 15.7199901,10 L13.6399901,10 C12.8199901,12.3300001 10.59999,14 7.98999003,14 C4.68000002,14 1.99000001,11.31 1.99000001,8 C1.99000001,4.69000002 4.68000002,2 7.98999003,2 C9.64999004,2 11.12999,2.69000001 12.2099901,3.78000002 L8.98999004,7 L15.9899901,7 L15.9899901,0 L13.6399901,2.35000001 Z" id="RefreshOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

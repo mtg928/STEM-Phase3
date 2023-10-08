@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Close icon</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="FMECA-Calculator-1.1" transform="translate(-1602.000000, -4.000000)" stroke="#000000">
+            <g id="Group-21" transform="translate(1180.000000, 5.000000)">
+                <g id="PC-Window-nav-icons-top-right" transform="translate(370.000000, 0.000000)">
+                    <g id="Close-icon" transform="translate(60.778175, 7.778175) rotate(45.000000) translate(-60.778175, -7.778175) translate(55.278175, 2.278175)">
+                        <line x1="-2.84147705e-14" y1="5.5" x2="11" y2="5.5" id="Line-2-Copy"></line>
+                        <line x1="5.5" y1="0" x2="5.5" y2="11" id="Line-3"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
