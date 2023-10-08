@@ -1,7 +1,8 @@
 import { makeAutoObservable, action, observable } from "mobx"
-import http from "../services/httpService"
 import { emailValidator, passwordValidator } from "../utils/validation"
 import { NavigateFunction } from "react-router-dom"
+import http from "../services/httpService"
+import AuthService from "../services/authService"
 
 export class LoginStore {
 
@@ -11,13 +12,19 @@ export class LoginStore {
 
     errMsg = {
         email: '',
-        password: ''
+        password: '',
+    }
+
+    respMsg = {
+        error: '',
+        reason: '',
     }
 
     constructor() {
         makeAutoObservable(this, {
             email: observable,
             password: observable,
+            errMsg: observable,
             handleLogin: action,
             logout: action,
             setEmail: action,
@@ -33,18 +40,28 @@ export class LoginStore {
 
     setEmail = (email: string) => {
         this.email = email.trim()
+        this.setEmailErrorMsg(emailValidator(email))
     }
 
     setPassword = (password: string) => {
         this.password = password
+        this.setPasswordErrMsg(passwordValidator(password))
     }
 
     setEmailErrorMsg = (errMsg: string) => {
         this.errMsg.email = errMsg
+        if (errMsg.length > 0) {
+            return true
+        }
+        return false
     }
 
     setPasswordErrMsg = (errMsg: string) => {
         this.errMsg.password = errMsg
+        if (errMsg.length > 0) {
+            return true
+        }
+        return false
     }
 
     handleLogin = async (navigate: NavigateFunction) => {
@@ -52,18 +69,30 @@ export class LoginStore {
             return
         }
         this.setEmailErrorMsg(emailValidator(this.email))
-        this.setEmailErrorMsg(passwordValidator(this.password))
+        this.setPasswordErrMsg(passwordValidator(this.password))
+        if (this.errMsg.email.length > 0 || this.errMsg.password.length > 0) {
+            return
+        }
         this.loading = true
-        await http.post('/api/login', {
-            email: this.email,
-            password: this.password
-        })
+        try {
+            const result = await http.post('/api/login', {
+                email: this.email,
+                password: this.password
+            })
+            if (result.data.success === 'true') {
+                AuthService.storeToken(result.data.access_token)
+            }
+            else { }
+        } catch (error) {
+            console.log(error)
+        }
         this.loading = false
         navigate('/')
         return true
     }
 
     logout = async () => {
+        AuthService.removeStoredToken()
         return true
     }
 }

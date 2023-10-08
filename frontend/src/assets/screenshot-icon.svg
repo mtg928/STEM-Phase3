@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="18px" viewBox="0 0 22 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>DvrOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FMECA-Calculator-1.1" transform="translate(-29.000000, -201.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-20" transform="translate(-1.000000, 70.000000)">
+                <g id="Group-4" transform="translate(30.000000, 131.000000)">
+                    <path d="M20,0 L2,0 C0.900000004,0 0,0.900000004 0,2 L0,14 C0,15.1000001 0.900000004,16 2,16 L7,16 L7,18 L15,18 L15,16 L20,16 C21.1000001,16 22,15.1000001 22,14 L22,2 C22,0.900000004 21.1000001,0 20,0 Z M20,14 L2.00000001,14 L2.00000001,2.00000001 L20,2.00000001 L20,14 Z M18,5.00000002 L7.00000003,5.00000002 L7.00000003,7.00000002 L18,7.00000002 L18,5.00000002 Z M18,9.00000004 L7.00000003,9.00000004 L7.00000003,11 L18,11 L18,9.00000004 Z M6.00000002,5.00000002 L4.00000002,5.00000002 L4.00000002,7.00000002 L6.00000002,7.00000002 L6.00000002,5.00000002 Z M6.00000002,9.00000004 L4.00000002,9.00000004 L4.00000002,11 L6.00000002,11 L6.00000002,9.00000004 Z" id="DvrOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
