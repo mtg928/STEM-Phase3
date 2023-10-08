@@ -24,19 +24,19 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
-
-        boolean loggedIn = authenticationApplication.login(loginRequest);
-
-        return loggedIn ?
-                ResponseEntity.ok(LoginResponse.builder()
-                        .success(true)
-                        .access_token(ACCESS_TOKEN)
-                        .build()) :
-                ResponseEntity.badRequest()
-                        .body(ErrorResponse.builder()
-                                .error(LOGIN_FAILED)
-                                .error_message(LOGIN_FAILED)
-                                .build());
+        try {
+            String jwt = authenticationApplication.login(loginRequest);
+            return ResponseEntity.ok(LoginResponse.builder()
+                    .success(true)
+                    .access_token(jwt)
+                    .build());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest()
+                    .body(ErrorResponse.builder()
+                            .error(LOGIN_FAILED)
+                            .error_message(LOGIN_FAILED)
+                            .build());
+        }
     }
 
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)

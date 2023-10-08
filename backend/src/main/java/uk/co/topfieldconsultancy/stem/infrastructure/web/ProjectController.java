@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.co.topfieldconsultancy.stem.application.AuthenticationApplication;
 import uk.co.topfieldconsultancy.stem.application.ProjectApplication;
 import uk.co.topfieldconsultancy.stem.domain.Project;
 
@@ -19,11 +20,14 @@ public class ProjectController {
     @Autowired
     ProjectApplication projectApplication;
 
-    @RequestMapping(value = "/projects", method = RequestMethod.POST)
-    public ResponseEntity createProject(@RequestBody CreateProjectRequest createProjectRequest) {
+    @Autowired
+    AuthenticationApplication authenticationApplication;
 
+    @RequestMapping(value = "/projects", method = RequestMethod.POST)
+    public ResponseEntity createProject(@RequestBody CreateProjectRequest createProjectRequest, @RequestHeader(value = "Authorization") String authorizationHeader) {
         try {
-            Project createdProject = projectApplication.create(createProjectRequest, Long.valueOf(1));
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            Project createdProject = projectApplication.create(createProjectRequest, userId);
             return ResponseEntity.ok(CreateProjectResponse.builder()
                     .id(createdProject.getId())
                     .name(createdProject.getName())
@@ -48,9 +52,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/projects/{id}", method = RequestMethod.GET)
-    public ResponseEntity findProjectById(@PathVariable("id") Long id) {
+    public ResponseEntity findProjectById(@PathVariable("id") Long id, @RequestHeader(value = "Authorization") String authorizationHeader) {
         try {
-            Project projectForUser = projectApplication.findById(id, Long.valueOf(1));
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            Project projectForUser = projectApplication.findById(id, userId);
             return ResponseEntity.ok(CreateProjectResponse.builder()
                     .id(projectForUser.getId())
                     .name(projectForUser.getName())
@@ -75,9 +80,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
-    public ResponseEntity getAllProjects() {
+    public ResponseEntity getAllProjects(@RequestHeader(value = "Authorization") String authorizationHeader) {
         try {
-            List<Project> projectsForUser = projectApplication.findAll(Long.valueOf(1));
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            List<Project> projectsForUser = projectApplication.findAll(userId);
 
             return ResponseEntity.ok(projectsForUser.stream()
                     .map(project -> CreateProjectResponse.builder()
@@ -106,9 +112,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/projects/{id}", method = RequestMethod.PUT)
-    public ResponseEntity updateProject(@PathVariable("id") Long id, @RequestBody UpdateProjectRequest updateProjectRequest) {
+    public ResponseEntity updateProject(@PathVariable("id") Long id, @RequestBody UpdateProjectRequest updateProjectRequest, @RequestHeader(value = "Authorization") String authorizationHeader) {
         try {
-            Project updatedProject = projectApplication.update(updateProjectRequest, id, Long.valueOf(1));
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            Project updatedProject = projectApplication.update(updateProjectRequest, id, userId);
 
             return ResponseEntity.ok(CreateProjectResponse.builder()
                     .id(updatedProject.getId())
@@ -135,9 +142,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/projects/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteProject(@PathVariable("id") Long id) {
+    public ResponseEntity deleteProject(@PathVariable("id") Long id, @RequestHeader(value = "Authorization") String authorizationHeader) {
         try {
-            boolean isProjectDeleted = projectApplication.delete(id, Long.valueOf(1));
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            boolean isProjectDeleted = projectApplication.delete(id, userId);
             return ResponseEntity.ok()
                     .build();
 
