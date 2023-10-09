@@ -5,75 +5,59 @@ import {
   MenuList,
   MenuItem,
   Button,
-  Card,
   Typography,
 } from "@material-tailwind/react";
-import { ChevronDownIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
- 
+
 const menuItems = [
   {
-    title: "@material-tailwind/html",
-    description:
-      "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
+    title: "New Project",
+    hotkey: "Ctrl+N",
   },
   {
-    title: "@material-tailwind/react",
-    description:
-      "Learn how to use @material-tailwind/react, packed with rich components for React.",
+    title: "New Project Group",
+    hotkey: "Ctrl+G",
   },
   {
-    title: "Material Tailwind PRO",
-    description:
-      "A complete set of UI Elements for building faster websites in less time.",
+    title: "Open Project",
+    hotkey: "Ctrl+O",
+  },
+  {
+    title: "New Client",
+    hotkey: "Ctrl+C",
+  },
+  {
+    title: "Open Sample Project",
+    hotkey: "Ctrl+J",
   },
 ];
- 
+
 const DropDownButton: React.FC = () => {
   const [openMenu, setOpenMenu] = React.useState(false);
- 
+
   return (
-    <Menu open={openMenu} handler={setOpenMenu} allowHover>
+    <Menu open={openMenu} handler={setOpenMenu} allowHover placement="bottom-start" offset={{crossAxis: 110, mainAxis: 10}}>
       <MenuHandler>
         <Button
-          color="blue"
-          className="flex items-center gap-3 text-base font-normal capitalize tracking-normal shadow-none"
+          className="w-40 h-8 px-[0.8rem] bg-[#0E6CD4] rounded hover:shadow-none flex items-center gap-3 text-sm font-normal capitalize tracking-normal shadow-none"
         >
           Project File
-          <ChevronDownIcon
-            strokeWidth={2.5}
-            className={`h-3.5 w-3.5 transition-transform ${
-              openMenu ? "rotate-180" : ""
-            }`}
-          />
+          <div className="h-8 w-[2px] ml-4 bg-[#4990DE]"></div>
+          <svg
+            className="h-4 w-4 ml-1.5 text-white" width="24" height="24"
+            viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />  <path fill="white" d="M18 15l-6-6l-6 6h12" transform="rotate(180 12 12)" />
+          </svg>
         </Button>
       </MenuHandler>
-      <MenuList className="hidden w-[36rem] grid-cols-7 gap-3 overflow-visible lg:grid">
-        <Card
-          color="gray"
-          shadow={false}
-          variant="gradient"
-          className="col-span-3 grid h-full w-full place-items-center rounded-md"
-        >
-          <RocketLaunchIcon strokeWidth={1} className="h-28 w-28" />
-        </Card>
-        <ul className="col-span-4 flex w-full flex-col gap-1">
-          {menuItems.map(({ title, description }) => (
-            <a href="#" key={title}>
-              <MenuItem>
-                <Typography variant="h6" color="blue-gray" className="mb-1">
-                  {title}
-                </Typography>
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="font-normal"
-                >
-                  {description}
-                </Typography>
-              </MenuItem>
-            </a>
-          ))}
-        </ul>
+      <MenuList className="overflow-visible">
+        {menuItems.map(({ title, hotkey }, idx: number) => (
+          <MenuItem key={idx} color="#DFE1FD" className="h-8 flex items-center gap-2">
+            <Typography variant="small" color="black" className="w-full font-medium">
+              {title}
+            </Typography>
+            <span className="text-end hover:text-black font-medium">{hotkey}</span>
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );

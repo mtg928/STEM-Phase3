@@ -22,7 +22,7 @@ const Sidebar: React.FC = observer(() => {
 
   return (
     <Card className={`w-[12rem] h-full p-4 shadow-xl shadow-blue-gray-900/5 select-none relative rounded-none rounded-tr-lg transition-all duration-500 ${hide ? '-mr-40 -translate-x-40' : ''}`}>
-      <List>
+      <List className='min-w-[8.5rem]'>
         <Link to='/'>
           <ListItem selected={location.pathname === '/'} className='w-[8.5rem] rounded focus:bg-[#DFE1FD] active:bg-[#DFE1FD] py-2'>
             <ListItemPrefix>

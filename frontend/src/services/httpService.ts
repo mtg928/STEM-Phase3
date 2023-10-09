@@ -1,8 +1,11 @@
 import axios from "axios"
+import AuthService from "./authService"
 
 const http = axios.create({
-    baseURL: import.meta.env.REAC_APP_API_URL,
     timeout: 30000,
+    headers: {
+        'Authorization': `Bearer ${AuthService.getStoredToken()}`,
+    }
 })
 
 export default http

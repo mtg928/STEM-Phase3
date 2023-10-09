@@ -1,6 +1,6 @@
 import React from 'react'
 import { LazyLoadImage } from "react-lazy-load-image-component"
-import HomeAccordion from "../../../components/HomeAccordion"
+import { HomeAccordion } from '../../../components/Accordion'
 import StemLogo from '../../../assets/stem-icon-white.svg'
 
 const HomePage: React.FC = () => {
