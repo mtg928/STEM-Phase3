@@ -1,2 +1,2 @@
 export { default as HomeAccordion } from './HomeAccordion'
-export { default as TableAccordion } from './TableAccordion'
+export { default as OverviewTableAccordion } from './OverviewTableAccordion'
