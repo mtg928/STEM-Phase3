@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
+import { RootState } from "../../../app/store"
+import { useSelector } from 'react-redux'
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react"
 import DataTable from "./table"
+import ProjectModal from "../../ProjectModal"
 
 function Icon({ open, color }: any) {
   return (
@@ -36,6 +39,7 @@ const headers = ['Project', 'Client', 'Owner', 'Status', 'Date', 'Comments', 'De
 const widthPerentage: Array<number> = [16, 13, 16, 13, 10, 25, 7]
 
 const TableAccordion: React.FC<any> = ({ projectData }: any) => {
+  const modifier = useSelector((state: RootState) => state.projectModifier.projects)
   const [open, setOpen] = useState<Array<boolean>>([])
   const [color, setColor] = useState<string>()
 
@@ -53,7 +57,7 @@ const TableAccordion: React.FC<any> = ({ projectData }: any) => {
 
   return (
     <>
-      {Object?.keys(projectData)?.map((label, idx) => (
+      {projectData && Object?.keys(projectData)?.map((label, idx) => (
         <Accordion open={open[idx] === true} key={idx} className="mt-10">
           <div className="flex items-center hover:cursor-pointer" onClick={() => handleOpen(idx)}>
             <Icon open={open[idx] === true} color={color} />
@@ -68,6 +72,10 @@ const TableAccordion: React.FC<any> = ({ projectData }: any) => {
           </AccordionBody>
         </Accordion>
       ))}
+
+      <div className={`w-full flex justify-center ${modifier.length > 0 ? '' : 'hidden'}`}>
+        <ProjectModal />
+      </div>
     </>
   );
 }

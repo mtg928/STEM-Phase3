@@ -1,7 +1,9 @@
 import React from 'react'
-import { OverviewStore } from '../../../stores/overviewStore';
-import { observer } from 'mobx-react';
-import { Card, Checkbox, Typography } from "@material-tailwind/react";
+import { Card, Checkbox, Typography } from "@material-tailwind/react"
+import { RootState } from "../../../app/store"
+import { add, remove } from '../../../Reducers/projectModify'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 type TableProperty = {
   id: number,
@@ -22,15 +24,22 @@ interface TableProps {
 
 //16, 13, 16, 13, 10, 25, 7
 
-const DataTable: React.FC<TableProps> = observer(({ header, data, widthArray }) => {
-  const [overviewStore] = React.useState(new OverviewStore())
+const DataTable = ({ header, data, widthArray }: TableProps) => {
+  const modifier = useSelector((state: RootState) => state.projectModifier.projects)
+  const dispatch = useDispatch()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     if (e.target.checked) {
-      overviewStore.setSelectedProjects(id)
+      dispatch(add(id))
     } else {
-      overviewStore.removeSelectedProjects(id)
+      dispatch(remove(id))
     }
   }
+  React.useEffect(() => {
+    if (modifier.length === 0) {
+      const checkboxes = document.getElementsByName('project_checkbox');
+      checkboxes.forEach((value: any) => value.checked = false)
+    }
+  }, [modifier.length])
   return (
     <>
       <Card className="h-full w-full overflow-hidden shadow-none border border-[#979797]">
@@ -38,7 +47,7 @@ const DataTable: React.FC<TableProps> = observer(({ header, data, widthArray }) 
           <thead>
             <tr>
               {header.map((head, idx) => (
-                <th key={idx} className={`h-9 text-center w-[calc(${widthArray[idx]}vw)] ${idx === 0 ? 'text-right' : ''}`}>
+                <th key={idx} className={`h-9 px-4 text-center`} style={{ width: `${widthArray[idx]}%` }}>
                   <Typography
                     variant="small"
                     color="black"
@@ -60,6 +69,7 @@ const DataTable: React.FC<TableProps> = observer(({ header, data, widthArray }) 
                       containerProps={{
                         className: "p-0",
                       }}
+                      name='project_checkbox'
                       color='green'
                       ripple={false}
                       crossOrigin={Checkbox}
@@ -102,32 +112,8 @@ const DataTable: React.FC<TableProps> = observer(({ header, data, widthArray }) 
           </tbody>
         </table>
       </Card>
-      {/* <div className='w-full rounded-xl border border-[#979797] overflow-hidden'>
-        <div className='flex flex-row w-full h-10'>
-          {header.map((value, idx) => (
-            <div key={idx} className={`
-              w-[calc(${widthArray[]}vw)] border-b inline-flex justify-center items-center select-none font-medium text-black
-            `}>{value}</div>
-          ))}
-        </div>
-        <div className='flex flex-col'>
-          {data.map((value: any, idx) => (
-            <div key={idx} className='w-full h-8 inline-flex justify-center items-center text-black hover:bg-[#F3F6FA]'>
-              {checkbox ? <div className='w-8 px-2 h-8 inline-flex justify-center items-center border'>
-                <input type='checkbox'></input>
-              </div> : ''}
-              {Object.keys(value).map((subValue, subIdx) => (
-                <></>
-              ))}
-              <div className='w-[5.25rem] h-8 inline-flex justify-center items-center border'>
-                <LazyLoadImage src={OpenIcon} width={18} height={18} alt="project open" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </>
   )
-})
+}
 
 export default DataTable

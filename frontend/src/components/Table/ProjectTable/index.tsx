@@ -1,9 +1,25 @@
 import React from 'react'
 import { Card, Typography } from "@material-tailwind/react"
 
+type DataTypes = {
+  id: number,
+  componentId: number,
+  functionName: string,
+  mpgType: string,
+  calcfileId: number,
+  calcFile: string,
+  standards: string,
+  comments: string | null,
+}
+
+interface ProjectTableProps {
+  data: Array<DataTypes>
+}
+
 const headers = ['Number', 'Component ID', 'Function Name', 'MPG Type', 'Calcfile ID', 'Calcfile', 'Standards', 'Comments', 'Details']
 const width = [6.766, 9.315, 12.478, 16.96, 6.766, 9.84, 21.265, 6.59]
-const ProjectTable: React.FC = ({ data }: any) => {
+
+const ProjectTable: React.FC<ProjectTableProps> = ({ data }) => {
   return (
     <>
       <Card className="h-full w-full overflow-hidden shadow-none border border-[#979797]">
@@ -11,7 +27,7 @@ const ProjectTable: React.FC = ({ data }: any) => {
           <thead>
             <tr>
               {headers.map((head, idx) => (
-                <th key={idx} className={`h-9 text-center ${idx === 0 ? 'text-right' : ''}`} style={{ width: `${width[idx]}%` }}>
+                <th key={idx} className={`h-9 text-center px-2`} style={{ width: `${width[idx]}%` }}>
                   <Typography
                     variant="small"
                     color="black"
@@ -23,33 +39,31 @@ const ProjectTable: React.FC = ({ data }: any) => {
               ))}
             </tr>
           </thead>
-          <tbody>{data.map(({ id, name, client, owner, status, lastUpdated, comments }, index) => (
-            <tr key={index} className="hover:bg-[#F3F6FA] border h-8 truncate">
-              <td className="h-8 border w-16%">
-                <div className={`flex items-center px-2`}>
-                  <div className='px-3 text-sm font-normal text-black truncate'>{name}</div>
-                </div>
+          <tbody>{data.map(({ id, componentId, functionName, mpgType, calcfileId, calcFile, standards, comments }, index: number) => (
+            <tr key={id} className="hover:bg-[#F3F6FA] border h-8 truncate">
+              <td className="h-8 border text-center">
+                <div className='px-8 text-sm font-normal text-black truncate'>{index + 1}</div>
               </td>
               <td className="h-8 border text-center">
-                <div className={`text-sm font-normal text-black truncate`}>{client}</div>
+                <div className='px-8 text-sm font-normal text-black truncate'>{componentId}</div>
               </td>
               <td className="h-8 border text-center">
-                <div className={`text-sm font-normal text-black truncate`}>{owner}</div>
-              </td>
-              <td className={`h-8 border text-center ${status === 'DONE' ? 'bg-[#02A42E]' : 'bg-[#FFAF35]'}`}>
-                <div className={`text-sm font-normal text-white truncate`}>
-                  {status === 'DONE' ? 'Done' : 'Working on it'}
-                </div>
+                <div className='px-8 text-sm font-normal text-black truncate'>{functionName}</div>
               </td>
               <td className="h-8 border text-center">
-                <div className={`text-sm font-normal text-black truncate`}>{new Date(lastUpdated).toLocaleDateString('en-US', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: '2-digit',
-                }).replace(/\//g, '.')}</div>
+                <div className='px-8 text-sm font-normal text-black truncate'>{mpgType}</div>
               </td>
               <td className="h-8 border text-center">
-                <div className={`px-8 w-[calc(25vw)] text-sm font-normal text-black truncate`}>{comments}</div>
+                <div className='px-8 text-sm font-normal text-black truncate'>{calcfileId}</div>
+              </td>
+              <td className="h-8 border text-center">
+                <div className='px-8 text-sm font-normal text-black truncate'>{calcFile}</div>
+              </td>
+              <td className="h-8 border text-center">
+                <div className='px-8 text-sm font-normal text-black truncate'>{standards}</div>
+              </td>
+              <td className="h-8 border text-center">
+                <div className={`px-5 w-[calc(21vw)] text-sm font-normal text-black truncate`}>{comments}</div>
               </td>
               <td className="h-8 border">
                 <div className={`h-8 w-full inline-flex justify-center items-center`}>

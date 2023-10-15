@@ -1,8 +1,6 @@
 import { makeAutoObservable, action, observable } from "mobx"
 import { emailValidator, passwordValidator } from "../utils/validation"
-import { NavigateFunction } from "react-router-dom"
 import axios from 'axios'
-import AuthService from "../services/authService"
 
 export class LoginStore {
 
@@ -27,7 +25,6 @@ export class LoginStore {
             errMsg: observable,
             loginErr: observable,
             handleLogin: action,
-            logout: action,
             setEmail: action,
             setPassword: action,
             setEmailErrorMsg: action,
@@ -73,7 +70,7 @@ export class LoginStore {
         this.loginErr.message = ''
     }
 
-    handleLogin = async (navigate: NavigateFunction) => {
+    handleLogin = async () => {
         if (this.loading) {
             return
         }
@@ -88,26 +85,17 @@ export class LoginStore {
                 email: this.email,
                 password: this.password
             })
-            if (result.data.success === true) {
-                AuthService.storeToken(result.data.access_token)
-                this.clearErrmsg()
+            if (result.status === 200) {
                 this.loading = false
-                navigate('/')
+                this.clearErrmsg()
+                return result.data
             }
-            else { }
         } catch (error: any) {
-            console.log(error)
-            if (error.response.data.success === false) {
+            if (error.response?.data?.success === false) {
                 this.loginErr.error = error.response.data.error
                 this.loginErr.message = error.response.data.error_message
             }
         }
-        this.loading = false
-        return true
-    }
-
-    logout = async () => {
-        AuthService.removeStoredToken()
         return true
     }
 }

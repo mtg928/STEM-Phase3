@@ -1,17 +1,19 @@
 import React from 'react'
-import { observer } from 'mobx-react';
-import { OverviewStore } from '../../stores/overviewStore'
+import type { RootState } from '../../app/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeAll } from '../../Reducers/projectModify'
 
-const ProjectModal: React.FC = observer(() => {
-  const [overviewStore] = React.useState(new OverviewStore())
+const ProjectModal: React.FC = () => {
+  const modifier = useSelector((state: RootState) => state.projectModifier.projects)
+  const dispatch = useDispatch()
   const handleClose = () => {
-    overviewStore.removeAll()
+    dispatch(removeAll())
   }
   return (
     <>
       <div className='absolute justify-center items-center w-1/3 min-w-[24rem] h-44 top-10 rounded-lg flex flex-col shadow-lg'>
         <div className='w-full h-14 px-8 bg-[#0E6CD4] relative flex items-center rounded-tl-xl rounded-tr-xl text-white text-2xl'>
-          <div><span className='font-bold'>{overviewStore.selectedProjects.length}</span>&nbsp;&nbsp;&nbsp;Project Selected</div>
+          <div><span className='font-bold'>{modifier.length}</span>&nbsp;&nbsp;&nbsp;Project Selected</div>
           <div className='absolute top-3 right-3 hover:cursor-pointer' onClick={handleClose}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -47,6 +49,6 @@ const ProjectModal: React.FC = observer(() => {
       </div>
     </>
   )
-})
+}
 
 export default ProjectModal

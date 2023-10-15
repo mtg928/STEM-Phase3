@@ -14,9 +14,17 @@ import AlertIcon from '../../assets/bell-alerts.svg'
 import CommentIcon from '../../assets/comments-icon.svg'
 import HelpIcon from '../../assets/question-icon.svg'
 import StemIcon from '../../assets/stem-logo-icon.svg'
+import useToken from "../../hooks/useToken"
+import { useNavigate } from "react-router-dom"
 
 const Header: React.FC = () => {
   const [openNav, setOpenNav] = React.useState(false);
+  const { removeToken } = useToken()
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    removeToken()
+    navigate('/login')
+  }
 
   React.useEffect(() => {
     window.addEventListener(
@@ -49,7 +57,7 @@ const Header: React.FC = () => {
         </Badge>
       </div>
       <div>
-        <Link to="/login" className="hover:cursor-pointer">Log out</Link>
+        <Link to="/login" onClick={handleLogout} className="hover:cursor-pointer">Log out</Link>
       </div>
     </ul>
   );
