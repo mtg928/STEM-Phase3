@@ -6,6 +6,7 @@ import HomePage from "../scenes/Dashboard/Home"
 import OverviewPage from "../scenes/Dashboard/Overview"
 import ScreenshotPage from "../scenes/Dashboard/Screenshot"
 import PrintPage from "../scenes/Dashboard/Print"
+import ProjectPage from "../scenes/Project"
 
 const userRouter: any = [
     {
@@ -26,7 +27,16 @@ const userRouter: any = [
             },
             {
                 path: '/overview',
-                element: <OverviewPage />,
+                children: [
+                    {
+                        path: '/overview',
+                        element: <OverviewPage />,
+                    },
+                    {
+                        path: '/overview/:id',
+                        element: <ProjectPage />,
+                    }
+                ]
             },
             {
                 path: '/screenshot',

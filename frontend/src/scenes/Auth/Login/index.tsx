@@ -5,10 +5,21 @@ import { useNavigate } from "react-router-dom"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { observer } from 'mobx-react';
 import StemIcon from '../../../assets/stem-logo-positive.svg'
+import useToken from '../../../hooks/useToken';
 
 const LoginPage: React.FC = observer(() => {
 	const [loginStore] = useState(new LoginStore())
+	const { setToken } = useToken()
 	const navigate = useNavigate()
+
+	const handleLogin = async () => {
+		const result = await loginStore.handleLogin()
+		console.log(result)
+		if (result?.success === true) {
+			setToken(result.access_token)
+			navigate('/')
+		}
+	}
 
 	return (
 		<>
@@ -45,10 +56,11 @@ const LoginPage: React.FC = observer(() => {
 								/>
 								{loginStore.errMsg.password.length > 0 ? (<span className="inline-flex text-sm text-red-600">{loginStore.errMsg.password}</span>) : ''}
 							</div>
+							{loginStore.loginErr.error.length > 0 ? (<span className="mt-5 inline-flex text-xs text-red-600">{loginStore.loginErr.error + ": " + loginStore.loginErr.message}</span>) : ''}
 							<div className="w-full inline-flex mt-2"><p className='text-start text-sm font-medium text-blue-500 hover:cursor-pointer'>Forgot your password?</p></div>
 							<div
 								className="mt-7 w-full h-10 bg-[#0E6CD4] hover:bg-blue-500 active:bg-[#0E6CD4] rounded gap-2.5 btn normal-case hover:cursor-pointer text-white font-medium inline-flex justify-center items-center"
-								onClick={() => loginStore.handleLogin(navigate)}
+								onClick={handleLogin}
 							>Continue</div>
 							<p className='mt-10 text-sm'>By proceeding, you agree to the</p>
 							<div><span className="mt-1 text-blue-500 text-sm hover:underline hover:cursor-pointer">Terms of Service</span> and <span className="text-blue-500 text-sm hover:underline hover:cursor-pointer">Privacy Policy.</span></div>

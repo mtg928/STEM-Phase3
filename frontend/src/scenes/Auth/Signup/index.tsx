@@ -38,8 +38,33 @@ const SignUpPage: React.FC = observer(() => {
 									placeholder='Name@company.com'
 									onChange={(e) => signupStore.setEmail(e.target.value)}
 								/>
-								{signupStore.errMsg.email.length > 0 ? (<span className="inline-flex text-sm text-red-600">{signupStore.errMsg.email}</span>) : ''}
+								{signupStore.errMsg.email.length > 0 ? (<span className="inline-flex text-xs text-red-600">{signupStore.errMsg.email}</span>) : ''}
 							</div>
+							<div className='w-full'>
+								<label htmlFor="password" className="block text-sm">Password</label>
+								<input
+									className={`block w-full h-10 px-4 py-4 mt-2 bg-white border rounded focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40
+									${signupStore.errMsg.password.length > 0 ? `border-red-500` : ``}`}
+									type="password"
+									id="password"
+									placeholder='Password'
+									onChange={(e) => signupStore.setPassword(e.target.value)}
+								/>
+								{signupStore.errMsg.password.length > 0 ? (<span className="inline-flex text-xs text-red-600">{signupStore.errMsg.password}</span>) : ''}
+							</div>
+							<div className='w-full'>
+								<label htmlFor="confirm" className="block text-sm">Confirm Password</label>
+								<input
+									className={`block w-full h-10 px-4 py-4 mt-2 bg-white border rounded focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40
+									${signupStore.errMsg.confirmPassword.length > 0 ? `border-red-500` : ``}`}
+									type="password"
+									id="confirm"
+									placeholder='Password Confirmation'
+									onChange={(e) => signupStore.passwordConfirmation(e.target.value)}
+								/>
+								{signupStore.errMsg.confirmPassword.length > 0 ? (<span className="inline-flex text-xs text-red-600">{signupStore.errMsg.confirmPassword}</span>) : ''}
+							</div>
+							{signupStore.registerErr.error.length > 0 ? (<span className="mt-5 inline-flex text-xs text-red-600">{signupStore.registerErr.error + ": " + signupStore.registerErr.message}</span>) : ''}
 							<div
 								className="mt-7 w-full h-10 bg-[#0E6CD4] hover:bg-blue-500 active:bg-[#0E6CD4] rounded gap-2.5 btn normal-case hover:cursor-pointer text-white font-medium inline-flex justify-center items-center"
 								onClick={() => signupStore.handleSignup(navigate)}

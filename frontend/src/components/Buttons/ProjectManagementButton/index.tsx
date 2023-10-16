@@ -7,18 +7,21 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import ProjectManagementIcon from '../../../assets/project-manange-icon.svg'
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const DropDownButton: React.FC<{ handleNew: MouseEventHandler<HTMLLIElement> & MouseEventHandler<HTMLButtonElement> }> = ({ handleNew }) => {
+const ProjectManagementButton: React.FC = () => {
   const [openMenu, setOpenMenu] = React.useState(false);
 
   return (
-    <Menu open={openMenu} handler={setOpenMenu} allowHover placement="bottom-start" offset={{ crossAxis: 110, mainAxis: 10 }}>
+    <Menu open={openMenu} handler={setOpenMenu} allowHover placement="bottom-end" offset={{crossAxis: 1}} >
       <MenuHandler>
         <Button
-          className="w-40 h-8 px-[0.8rem] bg-[#0E6CD4] rounded hover:shadow-none flex items-center gap-3 text-sm font-normal capitalize tracking-normal shadow-none"
+          className="w-60 h-8 px-[0.8rem] bg-[#0E6CD4] rounded hover:shadow-none flex items-center gap-3 text-sm font-light capitalize tracking-normal shadow-none"
         >
-          Project File
-          <div className="h-8 w-[2px] ml-4 bg-[#4990DE]"></div>
+          <LazyLoadImage src={ProjectManagementIcon} alt="project management" />
+          Project Management
+          <div className="h-8 w-[2px] ml-2 bg-[#4990DE]"></div>
           <svg
             className="h-4 w-4 ml-1.5 text-white" width="24" height="24"
             viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -26,40 +29,34 @@ const DropDownButton: React.FC<{ handleNew: MouseEventHandler<HTMLLIElement> & M
           </svg>
         </Button>
       </MenuHandler>
-      <MenuList className="overflow-visible">
-        <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2" onClick={handleNew}>
-          <Typography variant="small" color="black" className="w-full font-medium">
-            New Project
-          </Typography>
-          <span className="text-end hover:text-black font-medium">Ctrl+N</span>
-        </MenuItem>
+      <MenuList className="overflow-visible w-[19rem] mt-2">
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
-            New Project Group
+            Project Settings
           </Typography>
           <span className="text-end hover:text-black font-medium">Ctrl+G</span>
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
-            Open Project
+            Client Settings
           </Typography>
-          <span className="text-end hover:text-black font-medium">Ctrl+O</span>
+          <span className="text-end hover:text-black font-medium">Ctrl+H</span>
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
-            New Client
+            System Architecture
           </Typography>
-          <span className="text-end hover:text-black font-medium">Ctrl+C</span>
+          <span className="text-end hover:text-black font-medium">Ctrl+H</span>
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
-            Open Sample Project
+            Electronic Components
           </Typography>
-          <span className="text-end hover:text-black font-medium">Ctrl+J</span>
+          <span className="text-end hover:text-black font-medium">Ctrl+B</span>
         </MenuItem>
       </MenuList>
     </Menu>
   );
 }
 
-export default DropDownButton
+export default ProjectManagementButton

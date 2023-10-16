@@ -1,8 +1,6 @@
 import { makeAutoObservable, action, observable } from "mobx"
 import { emailValidator, passwordValidator } from "../utils/validation"
-import { NavigateFunction } from "react-router-dom"
-import http from "../services/httpService"
-import AuthService from "../services/authService"
+import axios from 'axios'
 
 export class LoginStore {
 
@@ -15,9 +13,9 @@ export class LoginStore {
         password: '',
     }
 
-    respMsg = {
+    loginErr = {
         error: '',
-        reason: '',
+        message: '',
     }
 
     constructor() {
@@ -25,12 +23,13 @@ export class LoginStore {
             email: observable,
             password: observable,
             errMsg: observable,
+            loginErr: observable,
             handleLogin: action,
-            logout: action,
             setEmail: action,
             setPassword: action,
             setEmailErrorMsg: action,
             setPasswordErrMsg: action,
+            clearErrmsg: action,
         })
     }
 
@@ -50,6 +49,7 @@ export class LoginStore {
 
     setEmailErrorMsg = (errMsg: string) => {
         this.errMsg.email = errMsg
+        this.clearErrmsg()
         if (errMsg.length > 0) {
             return true
         }
@@ -58,13 +58,19 @@ export class LoginStore {
 
     setPasswordErrMsg = (errMsg: string) => {
         this.errMsg.password = errMsg
+        this.clearErrmsg()
         if (errMsg.length > 0) {
             return true
         }
         return false
     }
 
-    handleLogin = async (navigate: NavigateFunction) => {
+    clearErrmsg = () => {
+        this.loginErr.error = ''
+        this.loginErr.message = ''
+    }
+
+    handleLogin = async () => {
         if (this.loading) {
             return
         }
@@ -75,24 +81,21 @@ export class LoginStore {
         }
         this.loading = true
         try {
-            const result = await http.post('/api/login', {
+            const result = await axios.post('/api/auth/login', {
                 email: this.email,
                 password: this.password
             })
-            if (result.data.success === 'true') {
-                AuthService.storeToken(result.data.access_token)
+            if (result.status === 200) {
+                this.loading = false
+                this.clearErrmsg()
+                return result.data
             }
-            else { }
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            if (error.response?.data?.success === false) {
+                this.loginErr.error = error.response.data.error
+                this.loginErr.message = error.response.data.error_message
+            }
         }
-        this.loading = false
-        navigate('/')
-        return true
-    }
-
-    logout = async () => {
-        AuthService.removeStoredToken()
         return true
     }
 }
