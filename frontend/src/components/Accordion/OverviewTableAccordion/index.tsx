@@ -18,7 +18,7 @@ function Icon({ open, color }: any) {
       strokeWidth={3}
       stroke="currentColor"
       color={color}
-      className={`${open === 0 ? "" : "-rotate-90"} h-4 w-4 mt-1 transition-transform`}
+      className={`${open ? "" : "-rotate-90"} h-4 w-4 mt-1 transition-transform`}
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
     </svg>
@@ -38,7 +38,7 @@ const headers = ['Project', 'Client', 'Owner', 'Status', 'Date', 'Comments', 'De
 
 const widthPerentage: Array<number> = [16, 13, 16, 13, 10, 25, 7]
 
-const TableAccordion: React.FC<any> = ({ projectData }: any) => {
+const TableAccordion: React.FC<any> = ({ projectData, handleDelete, handleDuplicate }: any) => {
   const modifier = useSelector((state: RootState) => state.projectModifier.projects)
   const [open, setOpen] = useState<Array<boolean>>([])
   const [color, setColor] = useState<string>()
@@ -58,9 +58,9 @@ const TableAccordion: React.FC<any> = ({ projectData }: any) => {
   return (
     <>
       {projectData && Object?.keys(projectData)?.map((label, idx) => (
-        <Accordion open={open[idx] === true} key={idx} className="mt-10">
+        <Accordion open={open[idx] ? false : true} key={idx} className="mt-10">
           <div className="flex items-center hover:cursor-pointer" onClick={() => handleOpen(idx)}>
-            <Icon open={open[idx] === true} color={color} />
+            <Icon open={open[idx] ? false : true} color={color} />
             <AccordionHeader className="border-none text-black">
               <span className={`text-xl font-medium ml-1`}>
                 {label}
@@ -74,7 +74,7 @@ const TableAccordion: React.FC<any> = ({ projectData }: any) => {
       ))}
 
       <div className={`w-full flex justify-center ${modifier.length > 0 ? '' : 'hidden'}`}>
-        <ProjectModal />
+        <ProjectModal handleDelete={handleDelete} handleDuplicate={handleDuplicate} />
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { observer } from 'mobx-react';
 import StemIcon from '../../../assets/stem-logo-positive.svg'
 import useToken from '../../../hooks/useToken';
+import sideLogo from '../../../assets/large-login-stem-logo-v2.svg'
 
 const LoginPage: React.FC = observer(() => {
 	const [loginStore] = useState(new LoginStore())
@@ -66,7 +67,13 @@ const LoginPage: React.FC = observer(() => {
 							<div><span className="mt-1 text-blue-500 text-sm hover:underline hover:cursor-pointer">Terms of Service</span> and <span className="text-blue-500 text-sm hover:underline hover:cursor-pointer">Privacy Policy.</span></div>
 						</div>
 					</div>
-					<div className="w-2/5 h-full bg-blue-500 hidden lg:block"></div>
+					<div className="w-2/5 h-full hidden lg:block bg-[#02A42E] relative">
+						<div className='w-full h-full flex justify-center items-center'>
+							<LazyLoadImage src={sideLogo} className='w-[70%] h-full' />
+						</div>
+						{/* <div className='absolute left-48 top-[75%] text-white'>Developed by Topfield</div> */}
+						{/* <div className='bg-contain bg-no-repeat w-full h-[calc(80vh)] bg-top' style={{backgroundImage: `url(${sideLogo})`}}></div> */}
+					</div>
 				</div>
 			</main >
 		</>
