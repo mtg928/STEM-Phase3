@@ -6,10 +6,13 @@ on:
   pull_request:
     branches: [ "awaconsulting" ]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  
 jobs:
 
-  build:
-
+  build-and-push-image:
     runs-on: ubuntu-latest
 
     steps:
