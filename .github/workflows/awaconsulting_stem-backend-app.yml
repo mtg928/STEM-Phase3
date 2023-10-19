@@ -8,6 +8,7 @@ on:
     branches:
       - awaconsulting
   workflow_dispatch:
+  
 
 jobs:
   build:
