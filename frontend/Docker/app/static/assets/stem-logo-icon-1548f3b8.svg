@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="26px" viewBox="0 0 42 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>stem-logo-icon</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FMECA-Calculator-1.1" transform="translate(-1440.000000, -22.000000)" fill="#010151" fill-rule="nonzero">
+            <g id="Group-21" transform="translate(1180.000000, 5.000000)">
+                <g id="Profile-icons" transform="translate(252.000000, 10.000000)">
+                    <g id="stem-logo-icon" transform="translate(8.000000, 7.000000)">
+                        <rect id="Rectangle" x="10.5625" y="0" width="9.75" height="6.5"></rect>
+                        <g id="Group">
+                            <path d="M8.01643807,16.0495556 C3.59550538,16.0495556 0,12.4503097 0,8.02477781 C0,3.59924589 3.59550538,0 8.01643807,0 L8.01643807,6.09911123 C6.95667335,6.09911123 6.09277274,6.96215998 6.09277274,8.02477781 C6.09277274,9.08739564 6.95492456,9.95044438 8.01643807,9.95044438 L8.01643807,16.0495556 Z" id="Path"></path>
+                            <path d="M33.4210619,26 L33.4210619,19.9008888 C34.4808267,19.9008888 35.3447273,19.03784 35.3447273,17.9752222 C35.3447273,16.9126044 34.4825754,16.0495556 33.4210619,16.0495556 L33.4210619,9.95044438 C37.8419946,9.95044438 41.4375,13.5496903 41.4375,17.9752222 C41.4375,22.4007541 37.8419946,26 33.4210619,26 Z" id="Path"></path>
+                            <rect id="Rectangle" x="10.697328" y="9.95044438" width="19.7822747" height="6.09911123"></rect>
+                            <rect id="Rectangle" x="21.5887714" y="19.8991382" width="8.89258019" height="6.09911123"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

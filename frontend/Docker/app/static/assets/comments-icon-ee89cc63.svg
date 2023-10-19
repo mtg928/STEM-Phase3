@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ChatOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FMECA-Calculator-1.1" transform="translate(-1230.000000, -25.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-21" transform="translate(1180.000000, 5.000000)">
+                <g id="Top-icons-comments/-Help" transform="translate(0.000000, 19.000000)">
+                    <path d="M52.0000001,3.00000001 L68.0000001,3.00000001 L68.0000001,15 L53.1700001,15 L52.0000001,16.1700001 L52.0000001,3.00000001 Z M52.0000001,1 C50.9000001,1 50.0100001,1.9 50.0100001,3 L50.0000001,21 L54.0000001,17 L68.0000001,17 C69.1000001,17 70.0000001,16.1000001 70.0000001,15 L70.0000001,3 C70.0000001,1.9 69.1000001,1 68.0000001,1 L52.0000001,1 Z M54.0000001,11 L62.0000001,11 L62.0000001,13 L54.0000001,13 L54.0000001,11 Z M54.0000001,8.00000003 L66.0000001,8.00000003 L66.0000001,10 L54.0000001,10 L54.0000001,8.00000003 Z M54.0000001,5.00000002 L66.0000001,5.00000002 L66.0000001,7.00000002 L54.0000001,7.00000002 L54.0000001,5.00000002 Z" id="ChatOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  stem-frontend:
+    container_name: stem-frontend
+    image: stem-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
