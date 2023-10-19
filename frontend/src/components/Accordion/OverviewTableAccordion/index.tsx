@@ -58,11 +58,11 @@ const TableAccordion: React.FC<any> = ({ projectData, handleDelete, handleDuplic
   return (
     <>
       {projectData && Object?.keys(projectData)?.map((label, idx) => (
-        <Accordion open={open[idx] ? false : true} key={idx} className="mt-10">
+        <Accordion open={open[idx] ? false : true} key={idx} className="mt-10 transition-none">
           <div className="flex items-center hover:cursor-pointer" onClick={() => handleOpen(idx)}>
             <Icon open={open[idx] ? false : true} color={color} />
             <AccordionHeader className="border-none text-black">
-              <span className={`text-xl font-medium ml-1`}>
+              <span className={`text-xl font-medium ml-1`} style={{color: `${color}`}}>
                 {label}
               </span>
             </AccordionHeader>

@@ -7,6 +7,7 @@ import OverviewPage from "../scenes/Dashboard/Overview"
 import ScreenshotPage from "../scenes/Dashboard/Screenshot"
 import PrintPage from "../scenes/Dashboard/Print"
 import ProjectPage from "../scenes/Project"
+import { FMECACalculator, FMECASummary } from "../scenes/Calculators/FMECA"
 
 const userRouter: any = [
     {
@@ -35,7 +36,17 @@ const userRouter: any = [
                     {
                         path: '/overview/:id',
                         element: <ProjectPage />,
-                    }
+                        children: [
+                            {
+                                path: '/overview/:id',
+                                element: <FMECASummary />,
+                            },
+                            {
+                                path: '/overview/:id/fmeca/:fmecaid',
+                                element: <FMECACalculator />
+                            },
+                        ],
+                    },
                 ]
             },
             {
