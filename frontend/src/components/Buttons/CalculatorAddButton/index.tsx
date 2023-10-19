@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React from "react";
 import {
   Menu,
   MenuHandler,
@@ -8,16 +8,18 @@ import {
 } from "@material-tailwind/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import AddCalculatorIcon from '../../../assets/add-calculator-icon.svg'
+import { Link, useLocation } from "react-router-dom";
 
 const CalculatorAddButton: React.FC = () => {
-  const [openMenu, setOpenMenu] = React.useState(false);
-
+  const location = useLocation()
   return (
-    <Menu open={openMenu} handler={setOpenMenu} allowHover placement="bottom-end">
+    <Menu placement="bottom-end">
       <MenuHandler>
-        <LazyLoadImage src={AddCalculatorIcon} alt="project management" />
+        <div>
+          <LazyLoadImage src={AddCalculatorIcon} alt="project management" />
+        </div>
       </MenuHandler>
-      <MenuList className="overflow-visible w-[19rem] drop-shadow-xl -mt-5">
+      <MenuList className="overflow-visible w-[19rem] drop-shadow-xl">
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
             Safety Integrity Level (SIL)
@@ -25,13 +27,15 @@ const CalculatorAddButton: React.FC = () => {
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
           <Typography variant="small" color="black" className="w-full font-medium">
-            Failure & Effects (FMECA)
+            Failure & Effects (FMEA)
           </Typography>
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2">
-          <Typography variant="small" color="black" className="w-full font-medium">
-            Failure & Effects Criticality (FMECA)
-          </Typography>
+          <Link to={`${location.pathname}/fmeca`}>
+            <Typography variant="small" color="black" className="w-full font-medium">
+              Failure & Effects Criticality (FMECA)
+            </Typography>
+          </Link>
         </MenuItem>
         <MenuItem color="#DFE1FD" className="h-8 flex items-center gap-2" disabled>
           <Typography variant="small" color="black" className="w-full font-medium">
