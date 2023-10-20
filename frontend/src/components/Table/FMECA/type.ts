@@ -1,0 +1,16 @@
+export type CalculatorDataTypes = {
+  id: number,
+  subSystemCode: string,
+  subSystemComponent: string,
+  function: string,
+  phase: string,
+  failureMode: string,
+  failureCause: string,
+  severityClass: string,
+  failureProbability: string,
+  failureEffectProbability: number,
+  failureModeRatio: number,
+  failureRate: number,
+  operatingTimeInHours: number,
+  failureModeCriticality: number,
+}
