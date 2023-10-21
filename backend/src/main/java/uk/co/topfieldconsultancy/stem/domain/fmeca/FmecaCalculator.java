@@ -15,6 +15,13 @@ public class FmecaCalculator {
     private Long projectId;
     private Long userId;
     private long parentFmecaId;
+    private Long componentId;
+    private String functionName;
+    private String mpgType;
+    private Long calcfileId;
+    private String calcfile;
+    private String standards;
+    private String comments;
     private String systemCode;
     private String systemComponent;
     private String subSystemCode;

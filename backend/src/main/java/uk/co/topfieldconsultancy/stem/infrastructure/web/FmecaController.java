@@ -35,6 +35,13 @@ public class FmecaController {
             FmecaResponse fmecaResponse = FmecaResponse.builder()
                     .id(createdFmeca.getId())
                     .parentFmecaId(createdFmeca.getParentFmecaId())
+                    .componentId(createdFmeca.getComponentId())
+                    .functionName(createdFmeca.getFunctionName())
+                    .mpgType(createdFmeca.getMpgType())
+                    .calcfile(createdFmeca.getCalcfile())
+                    .calcfileId(createdFmeca.getCalcfileId())
+                    .standards(createdFmeca.getStandards())
+                    .comments(createdFmeca.getComments())
                     .systemCode(createdFmeca.getSystemCode())
                     .systemComponent(createdFmeca.getSystemComponent())
                     .subSystemCode(createdFmeca.getSubSystemCode())
@@ -79,6 +86,13 @@ public class FmecaController {
                     .map(fmecaCalculator -> FmecaResponse.builder()
                             .id(fmecaCalculator.getId())
                             .parentFmecaId(fmecaCalculator.getParentFmecaId())
+                            .componentId(fmecaCalculator.getComponentId())
+                            .functionName(fmecaCalculator.getFunctionName())
+                            .mpgType(fmecaCalculator.getMpgType())
+                            .calcfile(fmecaCalculator.getCalcfile())
+                            .calcfileId(fmecaCalculator.getCalcfileId())
+                            .standards(fmecaCalculator.getStandards())
+                            .comments(fmecaCalculator.getComments())
                             .systemCode(fmecaCalculator.getSystemCode())
                             .systemComponent(fmecaCalculator.getSystemComponent())
                             .subSystemCode(fmecaCalculator.getSubSystemCode())
@@ -125,6 +139,13 @@ public class FmecaController {
                     .map(fmecaCalculator -> FmecaResponse.builder()
                             .id(fmecaCalculator.getId())
                             .parentFmecaId(fmecaCalculator.getParentFmecaId())
+                            .componentId(fmecaCalculator.getComponentId())
+                            .functionName(fmecaCalculator.getFunctionName())
+                            .mpgType(fmecaCalculator.getMpgType())
+                            .calcfile(fmecaCalculator.getCalcfile())
+                            .calcfileId(fmecaCalculator.getCalcfileId())
+                            .standards(fmecaCalculator.getStandards())
+                            .comments(fmecaCalculator.getComments())
                             .systemCode(fmecaCalculator.getSystemCode())
                             .systemComponent(fmecaCalculator.getSystemComponent())
                             .subSystemCode(fmecaCalculator.getSubSystemCode())
@@ -168,6 +189,13 @@ public class FmecaController {
             FmecaResponse fmecaResponse = FmecaResponse.builder()
                     .id(updatedFmeca.getId())
                     .parentFmecaId(updatedFmeca.getParentFmecaId())
+                    .componentId(updatedFmeca.getComponentId())
+                    .functionName(updatedFmeca.getFunctionName())
+                    .mpgType(updatedFmeca.getMpgType())
+                    .calcfile(updatedFmeca.getCalcfile())
+                    .calcfileId(updatedFmeca.getCalcfileId())
+                    .standards(updatedFmeca.getStandards())
+                    .comments(updatedFmeca.getComments())
                     .subSystemCode(updatedFmeca.getSubSystemCode())
                     .subSystemComponent(updatedFmeca.getSubSystemComponent())
                     .function(updatedFmeca.getFunction())
@@ -230,6 +258,13 @@ public class FmecaController {
     public static class CreateFmecaRequest {
         private Long id;
         private long parentFmecaId;
+        private Long componentId;
+        private String functionName;
+        private String mpgType;
+        private Long calcfileId;
+        private String calcfile;
+        private String standards;
+        private String comments;
         private String systemCode;
         private String systemComponent;
         private String subSystemCode;
@@ -253,6 +288,13 @@ public class FmecaController {
     public static class UpdateFmecaRequest {
         private Long id;
         private long parentFmecaId;
+        private Long componentId;
+        private String functionName;
+        private String mpgType;
+        private Long calcfileId;
+        private String calcfile;
+        private String standards;
+        private String comments;
         private String systemCode;
         private String systemComponent;
         private String subSystemCode;
@@ -278,6 +320,13 @@ public class FmecaController {
     public static class FmecaResponse {
         private Long id;
         private long parentFmecaId;
+        private Long componentId;
+        private String functionName;
+        private String mpgType;
+        private Long calcfileId;
+        private String calcfile;
+        private String standards;
+        private String comments;
         private String systemCode;
         private String systemComponent;
         private String subSystemCode;

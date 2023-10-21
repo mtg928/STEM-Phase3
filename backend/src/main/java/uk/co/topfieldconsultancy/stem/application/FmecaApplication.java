@@ -19,6 +19,13 @@ public class FmecaApplication {
                 .projectId(projectId)
                 .userId(userId)
                 .parentFmecaId(createFmecaRequest.getParentFmecaId())
+                .componentId(createFmecaRequest.getComponentId())
+                .functionName(createFmecaRequest.getFunctionName())
+                .mpgType(createFmecaRequest.getMpgType())
+                .calcfile(createFmecaRequest.getCalcfile())
+                .calcfileId(createFmecaRequest.getCalcfileId())
+                .standards(createFmecaRequest.getStandards())
+                .comments(createFmecaRequest.getComments())
                 .systemCode(createFmecaRequest.getSystemCode())
                 .systemComponent(createFmecaRequest.getSystemComponent())
                 .subSystemCode(createFmecaRequest.getSubSystemCode())
@@ -45,6 +52,13 @@ public class FmecaApplication {
         FmecaCalculator savedFmecaCalculator = fmecaRepository.findByIdAndUserIdAndProjectId(fmecaId, userId, projectId)
                 .orElseThrow();
 
+        savedFmecaCalculator.setComponentId(updateFmecaRequest.getComponentId());
+        savedFmecaCalculator.setFunctionName(updateFmecaRequest.getFunctionName());
+        savedFmecaCalculator.setMpgType(updateFmecaRequest.getMpgType());
+        savedFmecaCalculator.setCalcfileId(updateFmecaRequest.getCalcfileId());
+        savedFmecaCalculator.setCalcfile(updateFmecaRequest.getCalcfile());
+        savedFmecaCalculator.setStandards(updateFmecaRequest.getStandards());
+        savedFmecaCalculator.setComments(updateFmecaRequest.getComments());
         savedFmecaCalculator.setParentFmecaId(updateFmecaRequest.getParentFmecaId());
         savedFmecaCalculator.setSystemCode(updateFmecaRequest.getSystemCode());
         savedFmecaCalculator.setSystemComponent(updateFmecaRequest.getSystemComponent());
