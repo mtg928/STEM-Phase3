@@ -14,6 +14,9 @@ public class FmecaCalculator {
     private long id;
     private Long projectId;
     private Long userId;
+    private long parentFmecaId;
+    private String systemCode;
+    private String systemComponent;
     private String subSystemCode;
     private String subSystemComponent;
     private String function;

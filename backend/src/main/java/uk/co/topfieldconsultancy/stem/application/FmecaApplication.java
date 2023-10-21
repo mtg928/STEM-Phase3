@@ -3,7 +3,6 @@ package uk.co.topfieldconsultancy.stem.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.topfieldconsultancy.stem.domain.FmecaRepository;
-import uk.co.topfieldconsultancy.stem.domain.Project;
 import uk.co.topfieldconsultancy.stem.domain.fmeca.FmecaCalculator;
 import uk.co.topfieldconsultancy.stem.infrastructure.web.FmecaController;
 
@@ -19,6 +18,9 @@ public class FmecaApplication {
         FmecaCalculator saved = fmecaRepository.save(FmecaCalculator.builder()
                 .projectId(projectId)
                 .userId(userId)
+                .parentFmecaId(createFmecaRequest.getParentFmecaId())
+                .systemCode(createFmecaRequest.getSystemCode())
+                .systemComponent(createFmecaRequest.getSystemComponent())
                 .subSystemCode(createFmecaRequest.getSubSystemCode())
                 .subSystemComponent(createFmecaRequest.getSubSystemComponent())
                 .function(createFmecaRequest.getFunction())
@@ -43,6 +45,9 @@ public class FmecaApplication {
         FmecaCalculator savedFmecaCalculator = fmecaRepository.findByIdAndUserIdAndProjectId(fmecaId, userId, projectId)
                 .orElseThrow();
 
+        savedFmecaCalculator.setParentFmecaId(updateFmecaRequest.getParentFmecaId());
+        savedFmecaCalculator.setSystemCode(updateFmecaRequest.getSystemCode());
+        savedFmecaCalculator.setSystemComponent(updateFmecaRequest.getSystemComponent());
         savedFmecaCalculator.setSubSystemCode(updateFmecaRequest.getSubSystemCode());
         savedFmecaCalculator.setSubSystemComponent(updateFmecaRequest.getSubSystemComponent());
         savedFmecaCalculator.setFunction(updateFmecaRequest.getFunction());

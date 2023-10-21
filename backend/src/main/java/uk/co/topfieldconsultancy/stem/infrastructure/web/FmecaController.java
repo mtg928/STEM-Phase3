@@ -34,6 +34,9 @@ public class FmecaController {
 
             FmecaResponse fmecaResponse = FmecaResponse.builder()
                     .id(createdFmeca.getId())
+                    .parentFmecaId(createdFmeca.getParentFmecaId())
+                    .systemCode(createdFmeca.getSystemCode())
+                    .systemComponent(createdFmeca.getSystemComponent())
                     .subSystemCode(createdFmeca.getSubSystemCode())
                     .subSystemComponent(createdFmeca.getSubSystemComponent())
                     .function(createdFmeca.getFunction())
@@ -75,6 +78,9 @@ public class FmecaController {
             List<FmecaResponse> listOfFmecas = fmecaCalculatorsForProject.stream()
                     .map(fmecaCalculator -> FmecaResponse.builder()
                             .id(fmecaCalculator.getId())
+                            .parentFmecaId(fmecaCalculator.getParentFmecaId())
+                            .systemCode(fmecaCalculator.getSystemCode())
+                            .systemComponent(fmecaCalculator.getSystemComponent())
                             .subSystemCode(fmecaCalculator.getSubSystemCode())
                             .subSystemComponent(fmecaCalculator.getSubSystemComponent())
                             .function(fmecaCalculator.getFunction())
@@ -115,6 +121,7 @@ public class FmecaController {
 
             FmecaResponse fmecaResponse = FmecaResponse.builder()
                     .id(updatedFmeca.getId())
+                    .parentFmecaId(updatedFmeca.getParentFmecaId())
                     .subSystemCode(updatedFmeca.getSubSystemCode())
                     .subSystemComponent(updatedFmeca.getSubSystemComponent())
                     .function(updatedFmeca.getFunction())
@@ -176,6 +183,9 @@ public class FmecaController {
     @Setter
     public static class CreateFmecaRequest {
         private Long id;
+        private long parentFmecaId;
+        private String systemCode;
+        private String systemComponent;
         private String subSystemCode;
         private String subSystemComponent;
         private String function;
@@ -196,6 +206,9 @@ public class FmecaController {
     @Setter
     public static class UpdateFmecaRequest {
         private Long id;
+        private long parentFmecaId;
+        private String systemCode;
+        private String systemComponent;
         private String subSystemCode;
         private String subSystemComponent;
         private String function;
@@ -218,6 +231,9 @@ public class FmecaController {
     @Setter
     public static class FmecaResponse {
         private Long id;
+        private long parentFmecaId;
+        private String systemCode;
+        private String systemComponent;
         private String subSystemCode;
         private String subSystemComponent;
         private String function;
