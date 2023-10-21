@@ -66,10 +66,16 @@ public class FmecaApplication {
         return updatedFmeca;
     }
 
+
+    // TODO: If parent fmeca is deleted, delete all the children
     public boolean delete(Long fmecaId, Long userId, Long projectId) {
         FmecaCalculator byIdAndUserId = fmecaRepository.findByIdAndUserIdAndProjectId(fmecaId, userId, projectId)
                 .orElseThrow();
         fmecaRepository.delete(byIdAndUserId);
         return true;
+    }
+
+    public List<FmecaCalculator> findAllForParentFmeca(Long userId, Long projectId, Long parentFmecaId) {
+        return fmecaRepository.findAllByUserIdAndProjectIdAndParentFmecaId(userId, projectId, parentFmecaId);
     }
 }

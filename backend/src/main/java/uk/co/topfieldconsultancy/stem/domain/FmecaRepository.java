@@ -12,4 +12,5 @@ public interface FmecaRepository extends JpaRepository<FmecaCalculator, Long> {
 
     Optional<FmecaCalculator> findByIdAndUserIdAndProjectId(Long id, Long userId, Long projectId);
     List<FmecaCalculator> findAllByUserIdAndProjectId(Long userId, Long projectId);
+    List<FmecaCalculator> findAllByUserIdAndProjectIdAndParentFmecaId(Long userId, Long projectId, Long parentFmecaId);
 }

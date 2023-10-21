@@ -112,6 +112,52 @@ public class FmecaController {
         }
     }
 
+    @RequestMapping(value = "/projects/{id}/fmeca/{fmecaId}", method = RequestMethod.GET)
+    public ResponseEntity findAllFmecasForParentFmeca(@PathVariable("id") Long projectId,
+                                                      @PathVariable("fmecaId") Long fmecaId,
+                                                      @RequestHeader(value = "Authorization") String authorizationHeader) {
+        logger.info("Reading all fmeca for project and user " + projectId);
+        try {
+            Long userId = authenticationApplication.extractUserIdFromAuthorizationHeader(authorizationHeader);
+            List<FmecaCalculator> fmecaCalculatorsForProject = fmecaApplication.findAllForParentFmeca(userId, projectId, fmecaId);
+
+            List<FmecaResponse> listOfFmecas = fmecaCalculatorsForProject.stream()
+                    .map(fmecaCalculator -> FmecaResponse.builder()
+                            .id(fmecaCalculator.getId())
+                            .parentFmecaId(fmecaCalculator.getParentFmecaId())
+                            .systemCode(fmecaCalculator.getSystemCode())
+                            .systemComponent(fmecaCalculator.getSystemComponent())
+                            .subSystemCode(fmecaCalculator.getSubSystemCode())
+                            .subSystemComponent(fmecaCalculator.getSubSystemComponent())
+                            .function(fmecaCalculator.getFunction())
+                            .phase(fmecaCalculator.getPhase())
+                            .failureMode(fmecaCalculator.getFailureMode())
+                            .failureCause(fmecaCalculator.getFailureCause())
+                            .severityClass(fmecaCalculator.getSeverityClass())
+                            .failureProbability(fmecaCalculator.getFailureProbability())
+                            .failureEffectProbability(fmecaCalculator.getFailureEffectProbability())
+                            .failureModeRatio(fmecaCalculator.getFailureModeRatio())
+                            .failureRate(fmecaCalculator.getFailureRate())
+                            .operatingTimeInHours(fmecaCalculator.getOperatingTimeInHours())
+                            .failureModeCriticality(fmecaCalculator.calculateFailureModeCriticality())
+                            .build())
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(listOfFmecas);
+        } catch (AuthorizationException exception) {
+            return ResponseEntity.status(401)
+                    .body(ErrorResponse.builder()
+                            .error(exception.getLocalizedMessage())
+                            .error_message("Please login again!")
+                            .build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ErrorResponse.builder()
+                            .error(e.getLocalizedMessage())
+                            .error_message("Fmeca was not found. Please try later.")
+                            .build());
+        }
+    }
+
     @RequestMapping(value = "/projects/{id}/fmeca/{fmecaid}", method = RequestMethod.PUT)
     public ResponseEntity createFmeca(@RequestBody UpdateFmecaRequest updateFmecaRequest, @PathVariable("id") Long projectId, @PathVariable("fmecaid") Long fmecaId, @RequestHeader(value = "Authorization") String authorizationHeader) {
         logger.info("Creating fmeca for project " + projectId);
