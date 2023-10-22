@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AddIcon from '../../../assets/add-icon.svg'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import FMECATable from '../../../components/Table/FMECA/calcTable'
@@ -10,14 +10,14 @@ import { CalculatorDataTypes } from '../../../components/Table/FMECA/type'
 
 const FMECACalculator: React.FC = () => {
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { id, fmecaid } = useParams()
   const { token } = useToken()
 
   const [calcData, setCalcData] = useState<any>()
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`/api/projects/${id}/fmeca`, { headers: { 'Authorization': `Bearer ${token}` } })
+      const result = await axios.get(`/api/projects/${id}/fmeca/${fmecaid}`, { headers: { 'Authorization': `Bearer ${token}` } })
       setCalcData(result?.data)
     } catch (error: any) {
       if (error.response.status === 401) {
@@ -28,15 +28,7 @@ const FMECACalculator: React.FC = () => {
 
   const handleUpdate = async (updateValueList: CalculatorDataTypes) => {
     try {
-      await axios.put(`/api/projects/${id}/fmeca/${updateValueList.id}`, {
-        ...updateValueList
-      },
-        { headers: { 'Authorization': `Bearer ${token}` } })
-      // const updatedRow = result.data
-      // calcData?.map((item: CalculatorDataTypes) => {
-      //   if (item?.id === updatedRow?.id) return updatedRow
-      //   return item
-      // })
+      await axios.put(`/api/projects/${id}/fmeca/${updateValueList.id}`, updateValueList, { headers: { 'Authorization': `Bearer ${token}` } })
       await fetchData()
       console.log(calcData)
     } catch (error: any) {
@@ -52,7 +44,7 @@ const FMECACalculator: React.FC = () => {
 
   const handleAddNew = async () => {
     try {
-      await axios.post(`/api/projects/${id}/fmeca`, {}, { headers: { 'Authorization': `Bearer ${token}` } })
+      await axios.post(`/api/projects/${id}/fmeca`, { parentFmecaId: fmecaid }, { headers: { 'Authorization': `Bearer ${token}` } })
       await fetchData()
     } catch (error: any) {
       if (error.response.status === 401) {
@@ -63,9 +55,11 @@ const FMECACalculator: React.FC = () => {
   return (
     <>
       <div className='flex items-center'>
-        <div className={`text-[#00711e] ml-7 hover:cursor-pointer text-lg font-bold select-none`} >FMECA summary</div>
+        <Link to={`/overview/${id}`}>
+          <div className={`ml-7 hover:cursor-pointer text-lg font-bold select-none`} >FMECA summary</div>
+        </Link>
         <div className='mx-7 bg-[#979797] h-9 w-[1px]'></div>
-        <div className={` hover:cursor-pointer text-lg font-bold select-none`}>FMECA calculator</div>
+        <div className={`text-[#00711e] hover:cursor-pointer text-lg font-bold select-none`}>FMECA calculator</div>
         <div className='mx-7 bg-[#979797] h-9 w-[1px]'></div>
         <div className='font-medium select-none hover:cursor-pointer flex gap-2' onClick={handleAddNew}> <LazyLoadImage src={AddIcon} alt="Add" /> Add New System Function</div>
         <div className='ml-9 font-medium select-none hover:cursor-pointer flex gap-2'> <LazyLoadImage src={AddIcon} alt="Add" /> Add New System Component</div>

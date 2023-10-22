@@ -44,8 +44,8 @@ const FMECATable: React.FC<{ data: Array<CalculatorDataTypes>, handleUpdate: Fun
       <Accordion open={open === 1} >
         <div className='w-full flex flex-row'>
           <div className='h-14 w-2/5 bg-[#333375] text-white border inline-flex justify-center items-center'>Failure Identification</div>
-          <div className='h-14 w-1/5 bg-[#333375] text-white border inline-flex justify-center items-center'>Failure Effects</div>
-          <div className='h-14 w-2/5 bg-[#333375] text-white inline-flex justify-center items-center'>Detection and Recovery Measures</div>
+          <div className='h-14 w-2/5 bg-[#333375] text-white border inline-flex justify-center items-center'>Failure Effects</div>
+          <div className='h-14 w-1/5 bg-[#333375] text-white inline-flex justify-center items-center'>Detection and Recovery Measures</div>
         </div>
         <div className="w-full flex flex-row h-8">
           <div className='text-sm font-medium w-2/5 h-full flex flex-row'>
@@ -84,7 +84,17 @@ const FMECATable: React.FC<{ data: Array<CalculatorDataTypes>, handleUpdate: Fun
               </Tooltip>
             </div>
           </div>
-          <div className='text-sm font-medium w-1/5 h-full flex flex-row'>
+          <div className='text-sm font-medium w-2/5 h-full flex flex-row'>
+            <Tooltip content="SystemCode" placement="bottom" className="bg-white text-black border border-black">
+              <div className='w-full flex justify-center items-center select-none overflow-auto'>
+                <p className='truncate'>SystemCode</p>
+              </div>
+            </Tooltip>
+            <Tooltip content="SystemComponent" placement="bottom" className="bg-white text-black border border-black">
+              <div className='w-full flex justify-center items-center select-none overflow-auto'>
+                <p className='truncate'>SystemComponent</p>
+              </div>
+            </Tooltip>
             <Tooltip content="SeverityClass" placement="bottom" className="bg-white text-black border border-black">
               <div className='w-full flex justify-center items-center select-none overflow-auto'>
                 <p className='truncate'>SeverityClass</p>
@@ -101,7 +111,7 @@ const FMECATable: React.FC<{ data: Array<CalculatorDataTypes>, handleUpdate: Fun
               </div>
             </Tooltip>
           </div>
-          <div className='text-sm font-medium w-2/5 h-full flex flex-row'>
+          <div className='text-sm font-medium w-1/5 h-full flex flex-row'>
             <Tooltip content="FailureModeRatio" placement="bottom" className="bg-white text-black border border-black">
               <div className='w-full flex justify-center items-center select-none overflow-auto'>
                 <p className='truncate'>FailureModeRatio</p>
@@ -130,10 +140,11 @@ const FMECATable: React.FC<{ data: Array<CalculatorDataTypes>, handleUpdate: Fun
               <div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' />
             </div>
           </div>
-          <div className='text-sm font-medium w-1/5 h-8 flex flex-row'>
+          <div className='text-sm font-medium w-2/5 h-8 flex flex-row'>
+          <div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' />
             <div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' /><div className='' />
           </div>
-          <div className='text-sm font-medium w-2/5 h-8 flex flex-row'>
+          <div className='text-sm font-medium w-1/5 h-8 flex flex-row'>
             <div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' /><div className='w-full border inline-flex justify-center items-center' />
             <div className='w-full border inline-flex justify-center items-center' />
           </div>
@@ -173,18 +184,24 @@ const FMECATable: React.FC<{ data: Array<CalculatorDataTypes>, handleUpdate: Fun
                     </div>
                   </div>
                 </div>
-                <div className='w-1/5 h-8 flex'>
-                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/3'>
+                <div className='w-2/5 h-8 flex'>
+                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/5'>
+                    <input name="systemCode" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.systemCode} />
+                  </div>
+                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/5'>
+                    <input name="systemComponent" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.systemComponent} />
+                  </div>
+                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/5'>
                     <input name="severityClass" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.severityClass} />
                   </div>
-                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/3'>
+                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/5'>
                     <input name="failureProbability" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.failureProbability} />
                   </div>
-                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/3'>
+                  <div className='border border-[#DFE0E1] flex justify-center items-center w-1/5'>
                     <input name="failureEffectProbability" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.failureEffectProbability} />
                   </div>
                 </div>
-                <div className='w-2/5 h-8 flex'>
+                <div className='w-1/5 h-8 flex'>
                   <div className='border border-[#DFE0E1] flex justify-center items-center w-1/4'>
                     <input name="failureModeRatio" onBlur={(e) => handleInputBlur(e, rowValue.id)} className='w-full h-full truncate text-center focus:text-left focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40' defaultValue={rowValue.failureModeRatio} />
                   </div>

@@ -33,7 +33,7 @@ const ProjectPage: React.FC = () => {
             <div className='ml-6 hover:cursor-pointer inline-flex justify-center items-center'><LazyLoadImage src={CalcMgmtIcon} /><span className='ml-2 text-sm font-medium'>Calculation Management</span></div>
           </div>
           <div className='mt-5 w-full h-[3px] bg-[#00C134]'></div>
-          <div className='mt-5 flex flex-col px-1'>
+          <div className='mt-5 flex flex-col px-1 relative'>
             <Outlet />
           </div>
         </div>

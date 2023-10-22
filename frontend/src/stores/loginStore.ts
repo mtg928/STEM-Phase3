@@ -91,6 +91,7 @@ export class LoginStore {
                 return result.data
             }
         } catch (error: any) {
+            this.loading = false
             if (error.response?.data?.success === false) {
                 this.loginErr.error = error.response.data.error
                 this.loginErr.message = error.response.data.error_message

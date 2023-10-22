@@ -109,7 +109,6 @@ export class SignupStore {
             })
             console.log(result.data)
             if (result.data.success === true) {
-                this.loading = false
                 this.clearErrmsg()
                 navigate('/login')
             }
@@ -117,7 +116,9 @@ export class SignupStore {
                 this.registerErr.error = result.data.error
                 this.registerErr.message = result.data.error_message
             }
+            this.loading = false
         } catch (error: any) {
+            this.loading = false
             if (error.response.data?.success === false) {
                 this.registerErr.error = error.response.data.error
                 this.registerErr.message = error.response.data.error_message
