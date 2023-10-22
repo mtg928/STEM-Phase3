@@ -2,6 +2,8 @@ export type CalculatorDataTypes = {
   id: number,
   subSystemCode: string,
   subSystemComponent: string,
+  systemCode: string,
+  systemComponent: string,
   function: string,
   phase: string,
   failureMode: string,
