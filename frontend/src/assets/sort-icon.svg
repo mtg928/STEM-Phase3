@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="12px" viewBox="0 0 19 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>SortOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.54">
+        <g id="Project-overview--1.0" transform="translate(-446.000000, -183.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-11" transform="translate(66.000000, 173.000000)">
+                <g id="Group-6" transform="translate(380.500000, 8.000000)">
+                    <path d="M0,14 L6,14 L6,12 L0,12 L0,14 Z M0,2 L0,4 L18,4 L18,2 L0,2 Z M0,9.00000002 L12,9.00000002 L12,7.00000002 L0,7.00000002 L0,9.00000002 Z" id="SortOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

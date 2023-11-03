@@ -13,6 +13,18 @@ services:
     ports:
       - 5432:5432
 
+  stem-backend:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://db:5432/demo'
+    ports:
+      - 8081:8081
+
   adminer:
     image: adminer
     restart: always

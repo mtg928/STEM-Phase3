@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="18px" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>EditOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FEMECA-Calculator-Collapsed-menu" transform="translate(-601.000000, -300.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(510.500000, 299.000000)">
+                <g id="Group-7" transform="translate(91.000000, 1.000000)">
+                    <path d="M11.06,6.02000003 L11.98,6.94000003 L2.92000001,16.0000001 L2.00000001,16.0000001 L2.00000001,15.0800001 L11.06,6.02000003 Z M14.6600001,0 C14.4100001,0 14.1500001,0.1 13.9600001,0.290000001 L12.1300001,2.12000001 L15.8800001,5.87000002 L17.7100001,4.04000002 C18.1000001,3.65000002 18.1000001,3.02000001 17.7100001,2.63000001 L15.3700001,0.290000001 C15.1700001,0.0900000004 14.9200001,0 14.6600001,0 Z M11.06,3.19000001 L0,14.2500001 L0,18.0000001 L3.75000002,18.0000001 L14.8100001,6.94000003 L11.06,3.19000001 Z" id="EditOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

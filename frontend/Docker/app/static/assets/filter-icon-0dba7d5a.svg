@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>FilterAltOutlined</title>
+    <g id="Stem-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.54">
+        <g id="Project-overview--1.0" transform="translate(-347.000000, -181.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-11" transform="translate(66.000000, 173.000000)">
+                <g id="Group-4" transform="translate(281.000000, 8.000000)">
+                    <path d="M2.96160386,2.00000001 L12.9615739,2.00000001 L7.95157388,8.30000003 L2.96160386,2.00000001 Z M0.21160385,1.61000001 C2.23160386,4.20000002 5.96160387,9 5.96160387,9 L5.96160387,15 C5.96160387,15.5500001 6.41157388,16 6.96157388,16 L8.96157389,16 C9.51157389,16 9.96157389,15.5500001 9.96157389,15 L9.96157389,9 C9.96157389,9 13.6815739,4.20000002 15.7015739,1.61000001 C16.2115739,0.950000004 15.7415739,0 14.9115739,0 L1.00160385,0 C0.171603849,0 -0.298396153,0.950000004 0.21160385,1.61000001 Z" id="FilterAltOutlined"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
