@@ -70,6 +70,6 @@ This project is licensed under the [GNU General Public License v3.0]
 
 ## Contact
 
-If you have questions or need assistance, please feel free to contact us at malcolm.harris@topfieldconsultancy.co.uk![image](https://github.com/mtg928/STEM-Phase3/assets/41808296/b8b80ce3-7e74-49c9-9162-25466ccf1601)
+If you have questions or need assistance, please feel free to contact us at malcolm.harris@mac.com![image](https://github.com/mtg928/STEM-Phase3/assets/41808296/b8b80ce3-7e74-49c9-9162-25466ccf1601)
 
 
